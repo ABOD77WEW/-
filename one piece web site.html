@@ -1,0 +1,2781 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موسوعة الونبيسين</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Tone.js for sound effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
+        /* General styling for a more premium feel */
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+            transition: background-color 0.5s ease; /* Smooth theme transition */
+        }
+        
+        .shadow-glow {
+            box-shadow: 0 0 15px rgba(128, 90, 213, 0.7);
+        }
+        
+        body.light-theme { 
+            background-color: #f0f0f0;
+            color: #1a1a1a;
+        }
+        body.light-theme .navbar-custom {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+        body.light-theme .nav-tab {
+            color: #1a1a1a;
+            text-shadow: none;
+        }
+        body.light-theme .nav-tab:hover {
+            color: #fff;
+        }
+        body.light-theme .site-title-box {
+            background-image: linear-gradient(to right, #f39c12, #e74c3c);
+        }
+        body.light-theme .animated-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        body.light-theme .pro-challenge-section-new {
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.95));
+            border: 3px solid #ffc800;
+            box-shadow: 0 0 50px rgba(255, 200, 0, 0.5);
+        }
+        body.light-theme .pro-challenge-question-new {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        body.light-theme .pro-challenge-option-new {
+            background-color: #eee;
+            border: 1px solid #ccc;
+            color: #1a1a1a;
+        }
+        body.light-theme .pro-challenge-option-new:hover {
+            background-color: #ddd;
+        }
+        body.light-theme .icon-circle, body.light-theme .character-icon-container {
+            background-color: #e0e0e0;
+        }
+
+
+        /* Gradient overlay for hero section */
+        .hero-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.95) 100%);
+        }
+        /* Navbar with frosted glass effect */
+        .navbar-custom {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 2px solid rgba(255, 200, 0, 0.2);
+        }
+        /* Tabs with a more sophisticated gradient and shadow */
+        .nav-tab {
+            position: relative;
+            z-index: 1;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.75rem;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            color: #fff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            white-space: nowrap;
+        }
+        .nav-tab:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 200, 0, 0.5);
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #1a1a1a;
+            text-shadow: none;
+        }
+        /* Title box with a deep glow */
+        .site-title-box {
+            background-image: linear-gradient(to right, #e74c3c, #f39c12);
+            box-shadow: 0 0 30px rgba(243, 156, 18, 0.8);
+            transition: all 0.3s ease-in-out;
+        }
+        .site-title-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(243, 156, 18, 1);
+        }
+        /* Pro button with a dynamic, glowing effect */
+        .pro-button-new {
+            position: relative;
+            padding: 0.8rem 1.8rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: #1a1a1a;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 165, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            display: flex; /* Ensure flexbox for icon and text */
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+        .pro-button-new:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 50px rgba(255, 165, 0, 0.6);
+            background: linear-gradient(135deg, #FFD700, #FFC107, #FFA500);
+        }
+        .pro-button-new::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -200%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+            transform: skewX(20deg);
+            transition: transform 1.5s ease-out;
+            pointer-events: none;
+        }
+        .pro-button-new:hover::after {
+            transform: skewX(20deg) translateX(400%);
+        }
+        .pro-button-new.pro-activated-new {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: #fff;
+            animation: pro-button-glow 1.5s infinite alternate; /* Added glow animation */
+        }
+        @keyframes pro-button-glow {
+            0% { box-shadow: 0 0 20px rgba(46, 204, 113, 0.6); }
+            50% { box-shadow: 0 0 35px rgba(138, 43, 226, 0.8), 0 0 50px rgba(0, 191, 255, 0.7), 0 0 60px rgba(255, 215, 0, 0.5); } /* Purple, blue, gold glow */
+            100% { box-shadow: 0 0 20px rgba(46, 204, 113, 0.6); }
+        }
+        /* Card animations and styling */
+        .animated-card {
+            background-color: rgba(30, 30, 30, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease-in-out;
+            transform: translateY(20px);
+            opacity: 0;
+            filter: blur(5px);
+            cursor: pointer;
+        }
+        .animated-card.show {
+            transform: translateY(0);
+            opacity: 1;
+            filter: blur(0);
+        }
+        .animated-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 0 20px rgba(255, 200, 0, 0.5), 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+        /* New styling for Pro-only content overlay */
+        .pro-feature-overlay-new {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 2px solid #ffc800;
+        }
+        /* Pro challenge styling */
+        .pro-challenge-section-new {
+            background: linear-gradient(to bottom right, rgba(20, 20, 40, 0.95), rgba(40, 20, 20, 0.95));
+            border: 3px solid #ffc800;
+            box-shadow: 0 0 50px rgba(255, 200, 0, 0.5);
+            transition: all 0.5s ease-in-out;
+        }
+        .pro-challenge-question-new {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 200, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 200, 0, 0.2);
+            position: relative; /* For glow effect */
+            overflow: hidden; /* For containing the glow */
+        }
+        /* New glow effect for the question box (Conqueror's Haki style) */
+        @keyframes question-haki-glow {
+            0% { box-shadow: 0 0 10px rgba(128, 0, 128, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(128, 0, 128, 0.8), 0 0 50px rgba(128, 0, 128, 0.5); }
+            100% { box-shadow: 0 0 10px rgba(128, 0, 128, 0.4); }
+        }
+        .pro-challenge-question-new.glowing {
+            animation: question-haki-glow 2s infinite alternate;
+        }
+
+        .pro-challenge-option-new {
+            transition: all 0.2s ease-in-out;
+        }
+        .pro-challenge-option-new:hover {
+            background-color: rgba(70, 70, 70, 0.9);
+            border-color: #ffc800;
+            transform: scale(1.02);
+        }
+        .pro-challenge-option-new.correct {
+            background: linear-gradient(135deg, #00BFFF, #FF1493, #8A2BE2);
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.8);
+            color: #fff;
+            animation: pulse-unreal 0.8s infinite alternate;
+        }
+        .pro-challenge-option-new.incorrect {
+            background-color: rgba(244, 67, 54, 0.7);
+            border-color: #F44336;
+            box-shadow: 0 0 20px rgba(244, 67, 54, 0.8);
+            animation: shake 0.3s;
+        }
+        @keyframes pulse-unreal {
+            0% { box-shadow: 0 0 25px rgba(0, 191, 255, 0.8); }
+            100% { box-shadow: 0 0 35px rgba(0, 191, 255, 1); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+        /* Page transition overlay animation */
+        #page-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        #page-transition-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #transition-canvas {
+            display: block;
+        }
+
+        /* Pro success and failure animations */
+        #pro-success-animation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, rgba(255, 140, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0;
+            z-index: 10000;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        #pro-success-animation.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        #pro-failure-animation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 65, 108, 0.8) 0%, rgba(200, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0;
+            z-index: 10000;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        #pro-failure-animation.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        .pro-success-icon, .pro-failure-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .pro-success-icon.show, .pro-failure-icon.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Modal styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 2px solid #ffc800;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            max-width: 90%;
+            width: 700px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+            transform: translateY(-50px) scale(0.9);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+        }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        /* Modal with scrollbar for long content */
+        .modal-content.with-scroll {
+            max-height: 80vh; /* Adjust as needed */
+            overflow-y: auto;
+        }
+
+
+        /* Responsive image styling */
+        .responsive-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .responsive-img-full {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* New Pro Required Animation */
+        #pro-required-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 10001;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #pro-required-animation.show {
+            display: flex;
+            opacity: 1;
+        }
+        .pro-required-message {
+            color: #ffc800;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-shadow: 0 0 15px rgba(255, 200, 0, 0.8);
+            margin-bottom: 2rem;
+            animation: message-pop 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            opacity: 0;
+        }
+        @keyframes message-pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pro-required-arrow-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            height: 150px;
+        }
+        .pro-required-arrow {
+            position: absolute;
+            top: 50%;
+            right: 100%; /* Start off-screen */
+            transform: translateY(-50%) rotate(180deg);
+            width: 50px;
+            height: 50px;
+            color: #ffc800;
+            filter: drop-shadow(0 0 10px #ffc800);
+            animation: arrow-travel 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            z-index: 1;
+        }
+        @keyframes arrow-travel {
+            0% { right: 100%; transform: translateY(-50%) rotate(180deg) scale(0.5); opacity: 0.5; }
+            20% { right: 50%; transform: translateY(-50%) rotate(180deg) scale(1); opacity: 1; }
+            80% { right: 50%; transform: translateY(-50%) rotate(180deg) scale(1); opacity: 1; }
+            100% { right: 100%; transform: translateY(-50%) rotate(180deg) scale(0.5); opacity: 0.5; }
+        }
+        /* New Modal for card details */
+        .card-details-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+        .card-details-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .card-details-modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 3px solid #ffc800;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            max-width: 90%;
+            width: 500px; /* Reduced width */
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 50px rgba(255, 200, 0, 0.5);
+            transform-style: preserve-3d;
+            transform: rotateY(0deg) scale(0.5);
+            animation: card-pop-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        @keyframes card-pop-in {
+            0% { transform: rotateY(-90deg) scale(0.8); opacity: 0; }
+            50% { transform: rotateY(0deg) scale(1.05); opacity: 1; box-shadow: 0 0 40px rgba(138, 43, 226, 0.8), 0 0 60px rgba(0, 191, 255, 0.6); } /* Purple and blue glow */
+            100% { transform: rotateY(0deg) scale(1); opacity: 1; box-shadow: 0 0 30px rgba(255, 200, 0, 0.5); } /* Return to original glow */
+        }
+        .card-details-modal-content .close-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 2.5rem;
+            color: #ffc800;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card-details-modal-content .close-button:hover {
+            transform: rotate(90deg);
+        }
+        .card-details-modal-content h3 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px #ffc800;
+            margin-bottom: 1.5rem;
+        }
+        .card-details-modal-content p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+        }
+
+        /* New One Piece Success Animation CSS */
+        .one-piece-success-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            background-color: rgba(0,0,0,0.9);
+            overflow: hidden;
+        }
+        .one-piece-success-animation.show {
+            display: flex;
+        }
+
+        .success-animation-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0);
+            opacity: 0;
+            animation: success-content-pop 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        @keyframes success-content-pop {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .success-text-main {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #FFD700;
+            text-shadow: 0 0 30px #FFD700, 0 0 50px #FFC107;
+            animation: text-glow 2s infinite alternate, text-scale 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes text-scale {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes text-glow {
+            0% { text-shadow: 0 0 30px #FFD700, 0 0 50px #FFC107; }
+            100% { text-shadow: 0 0 40px #FFD700, 0 0 70px #FFC107, 0 0 90px #FFA500; }
+        }
+
+        /* New Crown Icon and its glow */
+        .success-crown-icon {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0) rotateY(0deg);
+            animation: crown-appear 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem; /* Adjust font size for the SVG if needed */
+            color: #FFD700; /* Base color for the crown */
+        }
+
+        @keyframes crown-appear {
+            0% { transform: translate(-50%, -50%) scale(0) rotateY(0deg); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1) rotateY(360deg); opacity: 1; }
+        }
+
+        @keyframes crown-glow {
+            0% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.8), 0 0 50px rgba(0, 191, 255, 0.7), 0 0 70px rgba(255, 215, 0, 0.6); }
+            50% { box-shadow: 0 0 50px rgba(138, 43, 226, 1), 0 0 80px rgba(0, 191, 255, 0.9), 0 0 100px rgba(255, 215, 0, 0.8); }
+            100% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.8), 0 0 50px rgba(0, 191, 255, 0.7), 0 0 70px rgba(255, 215, 0, 0.6); }
+        }
+        .success-crown-icon.glowing {
+            animation: crown-appear 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards, crown-glow 2s infinite alternate 1s; /* Appear then glow */
+        }
+
+        @keyframes text-fade-out {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+
+        /* New Failure Animation CSS */
+        #pro-failure-animation-new {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            background-color: rgba(0,0,0,0.9);
+            overflow: hidden;
+        }
+        #pro-failure-animation-new.show {
+            display: flex;
+        }
+        
+        .failure-animation-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0);
+            opacity: 0;
+            animation: failure-content-pop 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        @keyframes failure-content-pop {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .failure-text {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #F44336;
+        }
+        
+        /* أنماط البحث */
+        #search-input:focus {
+            box-shadow: 0 0 15px rgba(66, 153, 225, 0.5);
+        }
+        
+        .search-result-item {
+            background-color: rgba(30, 30, 30, 0.9);
+            border: 1px solid rgba(66, 153, 225, 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .search-result-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(66, 153, 225, 0.3);
+            border-color: rgba(66, 153, 225, 0.8);
+        }
+        
+        .character-icon-container {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(128, 90, 213, 0.5);
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+            background-color: rgba(128, 90, 213, 0.2);
+            border-radius: 15px;
+            width: fit-content;
+            margin-right: auto;
+            margin-left: 1rem;
+            animation: message-pop 0.3s ease-out;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(128, 90, 213, 0.8);
+            border-radius: 50%;
+            margin: 0 3px;
+            animation: typing-dot 1.4s infinite ease-in-out;
+        }
+        
+        @keyframes typing-dot {
+            0%, 20% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-5px);
+                opacity: 1;
+            }
+            80%, 100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+        }
+        
+        .chat-message.character {
+            margin-right: 1rem;
+        }
+        
+        #chat-messages {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .search-result-item {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            animation: fade-in 0.5s ease-out forwards;
+        }
+        
+        @keyframes fade-in {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .search-result-item:hover {
+            transform: translateY(-3px);
+            border-color: rgba(66, 153, 225, 0.5);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background-color: rgba(66, 153, 225, 0.1);
+        }
+        }
+            text-shadow: 0 0 30px #F44336, 0 0 50px #E74C3C;
+            animation: text-glow-red 2s infinite alternate, text-scale 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        @keyframes text-glow-red {
+            0% { text-shadow: 0 0 30px #F44336, 0 0 50px #E74C3C; }
+            100% { text-shadow: 0 0 40px #F44336, 0 0 70px #E74C3C, 0 0 90px #D32F2F; }
+        }
+
+        .failure-shatter-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(244, 67, 54, 0.5);
+            border-radius: 50%;
+            animation: shatter 1.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes shatter {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.8; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        
+        /* New card modal animation */
+        .card-details-modal-content.rotate-in {
+            animation: card-rotate-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        @keyframes card-rotate-in {
+            0% { transform: rotateY(-90deg) scale(0.8); opacity: 0; }
+            50% { transform: rotateY(0deg) scale(1.05); opacity: 1; box-shadow: 0 0 40px rgba(138, 43, 226, 0.8), 0 0 60px rgba(0, 191, 255, 0.6); } /* Purple and blue glow */
+            100% { transform: rotateY(0deg) scale(1); opacity: 1; box-shadow: 0 0 30px rgba(255, 200, 0, 0.5); } /* Return to original glow */
+        }
+        /* Card modal content styling for scrollbar */
+        .card-details-modal-content.scrollable-content {
+            overflow-y: auto;
+            max-height: 80vh; /* Limits height to allow scrolling */
+        }
+        /* New icon styling for circles */
+        .icon-circle {
+            width: 64px; /* Reduced size */
+            height: 64px; /* Reduced size */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 2rem; /* Adjusted font size for smaller circle */
+            margin-bottom: 1rem;
+            background-color: #2d3748; /* bg-gray-800 */
+        }
+        .character-icon-container {
+            width: 64px; /* Reduced size */
+            height: 64px; /* Reduced size */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem; /* Adjusted font size */
+            margin-bottom: 1rem;
+            background-color: #2d3748; /* bg-gray-800 */
+        }
+        .character-icon-svg {
+            fill: currentColor;
+            width: 48px; /* Adjusted SVG size */
+            height: 48px;
+        }
+
+        /* New Quiz Page Design Styles */
+        #pro-challenge-page .pro-challenge-section-new {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border: 3px solid #ffc800;
+            box-shadow: 0 0 60px rgba(255, 200, 0, 0.7);
+            padding: 3rem;
+            border-radius: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 600px; /* Ensure enough height for design */
+            position: relative;
+            overflow-y: auto; /* Allow vertical scrolling if content overflows */
+            overflow-x: hidden; /* Keep horizontal overflow hidden */
+        }
+        /* Make min-height responsive for smaller screens */
+        @media (max-width: 768px) {
+            #pro-challenge-page .pro-challenge-section-new {
+                min-height: 80vh; /* Adjust as needed for mobile */
+                padding: 1rem; /* Reduce padding on smaller screens */
+            }
+            #pro-challenge-page #quiz-container {
+                padding: 1rem; /* Reduce padding for quiz container on small screens */
+            }
+            #pro-challenge-page #question-box {
+                padding: 1rem; /* Reduce padding for question box on small screens */
+            }
+            #pro-challenge-page #question-text {
+                font-size: 1.5rem; /* Adjust font size for readability on small screens */
+            }
+            #pro-challenge-page .pro-challenge-option-new {
+                font-size: 1rem; /* Adjust option font size */
+            }
+        }
+
+
+        #pro-challenge-page .pro-challenge-section-new::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 200, 0, 0.1) 0%, transparent 70%);
+            animation: subtle-pulse 10s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes subtle-pulse {
+            0% { transform: scale(0.8) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.7; }
+            100% { transform: scale(0.8) rotate(360deg); opacity: 0.5; }
+        }
+
+        #pro-challenge-page .quiz-header {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        #pro-challenge-page #quiz-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 700px;
+            background-color: rgba(10, 10, 10, 0.8);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: inset 0 0 20px rgba(255, 200, 0, 0.3), 0 0 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease-in-out;
+            transform: scale(1);
+            opacity: 1;
+        }
+        #pro-challenge-page #quiz-container.hidden {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #pro-challenge-page #question-box {
+            background: linear-gradient(135deg, #3a3a3a, #1a1a1a);
+            border: 2px solid #ffc800;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 25px rgba(255, 200, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        /* Ensure question text itself does not have a gradual appearance */
+        #pro-challenge-page #question-text {
+            font-size: 2.25rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            opacity: 1; /* Ensure full opacity */
+            transition: none; /* No transition on text content itself */
+            animation: none; /* No animation on text content itself */
+        }
+        #pro-challenge-page #options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        #pro-challenge-page .pro-challenge-option-new {
+            background-color: #333;
+            border: 1px solid #555;
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        #pro-challenge-page .pro-challenge-option-new:hover {
+            background-color: #444;
+            border-color: #ffc800;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 200, 0, 0.4);
+        }
+        #pro-challenge-page .pro-challenge-option-new.selected {
+            border-width: 2px;
+        }
+        #pro-challenge-page .pro-challenge-option-new.correct {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            border-color: #2ecc71;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.7);
+        }
+        #pro-challenge-page .pro-challenge-option-new.incorrect {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            border-color: #e74c3c;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.7);
+        }
+        #pro-challenge-page #quiz-result {
+            margin-top: 2rem;
+        }
+        #pro-challenge-page #result-message {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+        #pro-challenge-page #retry-button,
+        #pro-challenge-page #quiz-homepage-button {
+            padding: 0.8rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Settings Modal Specific Styles */
+        #settings-modal .modal-content {
+            width: 600px;
+            max-width: 95%;
+            padding: 2rem;
+        }
+        #settings-modal .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #settings-modal .setting-item:last-child {
+            border-bottom: none;
+        }
+        #settings-modal input[type="range"] {
+            width: 60%;
+            -webkit-appearance: none;
+            height: 8px;
+            background: #ffc800;
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        #settings-modal input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        #settings-modal button.theme-toggle,
+        #settings-modal button.quality-toggle {
+            background-color: #ffc800;
+            color: #1a1a1a;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        #settings-modal button.theme-toggle:hover,
+        #settings-modal button.quality-toggle:hover {
+            background-color: #e0b000;
+        }
+
+        /* Custom Settings Icon Styles */
+        #settings-button-icon {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* New animation for the settings button */
+        #settings-button {
+            animation: settings-button-pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes settings-button-pulse {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+            }
+        }
+
+        /* Hover effect for the icon inside the button */
+        #settings-button:hover #settings-button-icon {
+            transform: rotate(90deg) scale(1.1);
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+        }
+
+        /* Footer Styling */
+        .footer-text {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-align: center;
+            padding: 2rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: footer-glow 2s infinite alternate;
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes footer-glow {
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            100% { filter: hue-rotate(360deg) brightness(1.5); }
+        }
+
+        /* Mobile Navigation (Hamburger Menu) Styles */
+        /* Hide regular tabs on small screens */
+        @media (max-width: 767px) {
+            .tabs-container {
+                display: none;
+            }
+            .navbar-custom .flex.items-center.space-x-6 {
+                justify-content: space-between; /* Space out title and hamburger */
+                width: 100%;
+            }
+            .navbar-custom .flex.items-center.space-x-4 {
+                display: none; /* Hide pro button on small screens, will be in mobile menu */
+            }
+        }
+
+        /* Show hamburger icon only on small screens */
+        #hamburger-button {
+            display: none;
+        }
+        @media (max-width: 767px) {
+            #hamburger-button {
+                display: block;
+            }
+        }
+
+        /* Mobile menu overlay */
+        #mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1050; /* Higher than navbar */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        #mobile-menu-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #mobile-menu-overlay .nav-tab {
+            font-size: 2rem;
+            padding: 1.5rem 0;
+            width: 80%;
+            text-align: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #mobile-menu-overlay .nav-tab:last-child {
+            border-bottom: none;
+        }
+        #mobile-menu-close-button {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 3rem;
+            color: #ffc800;
+            transition: transform 0.3s ease-in-out;
+        }
+        #mobile-menu-close-button:hover {
+            transform: rotate(90deg);
+        }
+        #mobile-menu-pro-button {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+        }
+
+        /* Scroll to Top Button Styles */
+        #scroll-to-top-button {
+            position: fixed;
+            bottom: 6rem; /* Above settings button */
+            right: 1.5rem;
+            background-color: #ffc800;
+            color: #1a1a1a;
+            padding: 0.75rem;
+            border-radius: 50%;
+            display: none; /* Hidden by default */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            z-index: 999;
+            opacity: 0;
+        }
+        #scroll-to-top-button.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #scroll-to-top-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            background-color: #e0b000;
+        }
+        
+        /* Loading Skeleton Styles */
+        .skeleton-card {
+            background-color: rgba(50, 50, 50, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 1rem;
+            height: 200px; /* Approximate height of a card */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-skeleton 1.5s infinite alternate;
+        }
+        .skeleton-card-icon {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(70, 70, 70, 0.9);
+            border-radius: 50%;
+            margin-bottom: 0.75rem;
+        }
+        .skeleton-card-title {
+            width: 80%;
+            height: 20px;
+            background-color: rgba(70, 70, 70, 0.9);
+            border-radius: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .skeleton-card-button {
+            width: 60%;
+            height: 36px;
+            background-color: rgba(70, 70, 70, 0.9);
+            border-radius: 9999px;
+            margin-top: 1rem;
+        }
+        @keyframes pulse-skeleton {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Page Transition Overlay -->
+    <div id="page-transition-overlay">
+        <canvas id="transition-canvas"></canvas>
+    </div>
+
+    <!-- New Pro Required Animation -->
+    <div id="pro-required-animation">
+        <p class="pro-required-message">للاستمتاع بالمميزات، فعل ونبيسي برو!</p>
+        <div class="pro-required-arrow-container">
+            <svg class="pro-required-arrow" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- One Piece Success Animation (New) -->
+    <div id="one-piece-success-animation" class="one-piece-success-animation">
+        <div class="success-animation-content">
+            <p class="success-text-main">تم تفعيل برو!</p>
+            <div class="success-crown-icon">
+                <!-- Jeweled Crown SVG Icon -->
+                <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                    <circle cx="12" cy="4" r="1" fill="#FFD700"/>
+                    <circle cx="15.09" cy="8.26" r="0.7" fill="#8A2BE2"/>
+                    <circle cx="22" cy="9.27" r="0.7" fill="#00BFFF"/>
+                    <circle cx="17" cy="14.14" r="0.7" fill="#FFD700"/>
+                    <circle cx="18.18" cy="21.02" r="0.7" fill="#8A2BE2"/>
+                    <circle cx="12" cy="17.77" r="0.7" fill="#00BFFF"/>
+                    <circle cx="5.82" cy="21.02" r="0.7" fill="#FFD700"/>
+                    <circle cx="7" cy="14.14" r="0.7" fill="#8A2BE2"/>
+                    <circle cx="2" cy="9.27" r="0.7" fill="#00BFFF"/>
+                    <circle cx="8.91" cy="8.26" r="0.7" fill="#FFD700"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pro Failure Animation (New) -->
+    <div id="pro-failure-animation-new">
+        <div class="failure-animation-content">
+            <div class="failure-shatter-effect"></div>
+            <p class="failure-text">فشلت المحاولة!</p>
+        </div>
+    </div>
+
+
+    <!-- Main Navigation Bar -->
+    <nav class="navbar-custom fixed top-0 w-full z-[1000] shadow-2xl rounded-b-2xl">
+        <div class="container mx-auto flex justify-between items-center h-20 px-4 md:px-8">
+            <div class="flex items-center space-x-6">
+                <div class="site-title-box p-3 rounded-lg shadow-lg">
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-white text-center">
+                        موسوعة الونبيسين
+                    </h1>
+                </div>
+                <div class="flex tabs-container space-x-2 md:space-x-4 text-xl">
+                    <a href="javascript:void(0);" id="homepage-tab" class="nav-tab">الرئيسية</a>
+                    <a href="javascript:void(0);" id="characters-tab" class="nav-tab">الشخصيات</a>
+                    <a href="javascript:void(0);" id="arcs-tab" class="nav-tab">الآركات</a>
+                    <a href="javascript:void(0);" id="theories-tab" class="nav-tab">النظريات</a>
+                    <a href="javascript:void(0);" id="fruits-tab" class="nav-tab">الفواكه</a>
+    
+                    <a href="javascript:void(0);" id="pro-features-tab" class="nav-tab">مميزات برو</a>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- Hamburger Menu Button for Mobile -->
+                <button id="hamburger-button" class="text-yellow-400 hover:text-white transition transform hover:scale-110">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </button>
+                <a href="javascript:void(0);" id="pro-button-main" class="pro-button-new flex items-center space-x-2">
+                    <span class="pro-icon-new">
+                        <!-- Crown SVG Icon -->
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                        </svg>
+                    </span>
+                    <span class="pro-text">ونبيسي برو</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="hidden">
+        <button id="mobile-menu-close-button">&times;</button>
+        <a href="javascript:void(0);" id="mobile-homepage-tab" class="nav-tab">الرئيسية</a>
+        <a href="javascript:void(0);" id="mobile-characters-tab" class="nav-tab">الشخصيات</a>
+        <a href="javascript:void(0);" id="mobile-arcs-tab" class="nav-tab">الآركات</a>
+        <a href="javascript:void(0);" id="mobile-theories-tab" class="nav-tab">النظريات</a>
+        <a href="javascript:void(0);" id="mobile-fruits-tab" class="nav-tab">الفواكه</a>
+
+        <a href="javascript:void(0);" id="mobile-pro-features-tab" class="nav-tab">مميزات برو</a>
+        <a href="javascript:void(0);" id="mobile-menu-pro-button" class="pro-button-new flex items-center space-x-2">
+            <span class="pro-icon-new">
+                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+            </span>
+            <span class="pro-text">ونبيسي برو</span>
+        </a>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="min-h-screen pt-32 pb-16">
+        <div class="absolute inset-0 bg-black -z-10">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div id="main-content-area" class="w-full">
+            <!-- Homepage Section -->
+            <section id="homepage" class="relative z-10 text-center p-8 md:p-12 max-w-7xl mx-auto bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl border border-gray-700">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-8 leading-tight text-white text-shadow-lg">
+                    مرحبًا بك في عالم ون بيس
+                </h1>
+                <p class="text-xl md:text-2xl lg:text-3xl mb-10 text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                    انطلق في مغامرة لا تُنسى مع قراصنة قبعة القش واكتشف أسرار البحار السبعة. قصة صداقة، شجاعة، وبحث عن أعظم كنز في العالم.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="javascript:void(0);" id="homepage-characters-button" class="button-glow px-8 py-4 bg-red-700 hover:bg-red-800 text-white font-bold rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                        استكشف الشخصيات
+                    </a>
+                    <a href="javascript:void(0);" id="homepage-arcs-button" class="button-glow px-8 py-4 bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                        استكشف الآركات
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Characters Page Section -->
+        <section id="characters-page" class="hidden relative z-10 w-full max-w-7xl mx-auto p-8 md:p-12 bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl border border-gray-700">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 text-red-400">شخصيات ون بيس</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-10">
+                <div class="custom-select-wrapper-new">
+                    <select id="character-filter" class="p-3 bg-gray-800 text-white rounded-xl">
+                        <option value="none">بدون تصفية</option>
+                        <option value="strength-desc">القوة (الأعلى أولاً)</option>
+                        <option value="strength-asc">القوة (الأدنى أولاً)</option>
+                        <option value="appearance-desc">كثرة الظهور (الأكثر أولاً)</option>
+                        <option value="appearance-asc">كثرة الظهور (الأقل أولاً)</option>
+                    </select>
+                </div>
+            </div>
+            <div id="characters-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+            </div>
+        </section>
+
+        <!-- Arcs Page Section -->
+        <section id="arcs-page" class="hidden relative z-10 w-full max-w-7xl mx-auto p-8 md:p-12 bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl border border-gray-700">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 text-red-400">آركات ون بيس</h2>
+            <div id="arcs-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+
+        <!-- Theories Page Section -->
+        <section id="theories-page" class="hidden relative z-10 w-full max-w-6xl mx-auto p-8 md:p-12 bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl border border-gray-700">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 text-yellow-400">أقوى نظريات ون بيس</h2>
+            <div id="theories-container" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            </div>
+        </section>
+
+        <!-- Fruits Page Section -->
+        <section id="fruits-page" class="hidden relative z-10 w-full max-w-6xl mx-auto p-8 md:p-12 bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl border border-gray-700">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 text-red-400">فواكه الشيطان</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-10">
+                <div class="custom-select-wrapper-new">
+                    <select id="fruit-filter" class="p-3 bg-gray-800 text-white rounded-xl">
+                        <option value="all">الكل</option>
+                        <option value="logia">لوغيا (Logia)</option>
+                        <option value="paramecia">باراميسيا (Paramecia)</option>
+                        <option value="zoan">زون (Zoan)</option>
+                    </select>
+                </div>
+            </div>
+            <div id="fruits-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+
+        <!-- Pro Challenge Section -->
+        <section id="pro-challenge-page" class="hidden relative z-10 w-full max-w-4xl mx-auto p-8 md:p-12 rounded-3xl shadow-2xl pro-challenge-section-new">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 text-yellow-400 quiz-header">تحدي ون بيس برو</h2>
+            <p class="text-lg text-gray-300 text-center mb-8 quiz-header">
+                أجب عن 5 أسئلة صعبة لتفعيل وضع البرو!
+            </p>
+            <div id="quiz-container" class="space-y-8">
+                <div id="question-box" class="pro-challenge-question-new p-6 rounded-xl glowing">
+                    <p id="question-text" class="text-2xl font-bold text-white mb-6 text-center"></p>
+                    <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    </div>
+                </div>
+                <div id="quiz-result" class="hidden text-center text-3xl font-extrabold mt-8">
+                    <p id="result-message"></p>
+                    <button id="retry-button" class="mt-8 px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-full transition transform hover:scale-105">
+                        إعادة المحاولة
+                    </button>
+                    <button id="quiz-homepage-button" class="mt-8 px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full transition transform hover:scale-105">
+                        العودة للصفحة الرئيسية
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search-page" class="hidden relative z-10 w-full max-w-6xl mx-auto p-8 md:p-12 bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl border border-gray-700">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 text-blue-400">البحث في عالم ون بيس</h2>
+            <div class="max-w-3xl mx-auto mb-10">
+                <div class="relative">
+                    <input type="text" id="search-input" class="w-full p-4 pr-12 bg-gray-800 text-white rounded-xl border-2 border-blue-500 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="ابحث عن شخصيات، آركات، فواكه، أو نظريات...">
+                    <button id="search-button" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 hover:text-blue-300 transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="search-results" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- نتائج البحث ستظهر هنا -->
+            </div>
+            <div id="no-search-results" class="hidden text-center py-10">
+                <p class="text-2xl text-gray-400">لم يتم العثور على نتائج. حاول استخدام كلمات بحث مختلفة.</p>
+            </div>
+        </section>
+
+
+        
+        <!-- Pro Features Section -->
+        <section id="pro-features-page" class="hidden relative z-10 w-full max-w-6xl mx-auto p-8 md:p-12 bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl border border-gray-700">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 text-yellow-400">مميزات ونبيسي برو</h2>
+            <p class="text-xl text-center text-gray-300 mb-12">لقد قمت بتفعيل جميع المميزات الحصرية لـ "ونبيسي برو"! استمتع بتجربة كاملة.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div id="pro-feature-analysis" class="animated-card p-6 rounded-xl flex flex-col items-center gap-4">
+                    <svg class="w-12 h-12 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-white">تحليلات حصرية للشخصيات</h3>
+                    <p class="text-md text-gray-300 text-center">وصول كامل لملفات الشخصيات السرية وتحليلات القوة والقدرات.</p>
+                </div>
+                <div id="pro-feature-filter" class="animated-card p-6 rounded-xl flex flex-col items-center gap-4">
+                    <svg class="w-12 h-12 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-white">خيارات تصفية متقدمة</h3>
+                    <p class="text-md text-gray-300 text-center">تحكم كامل في عرض الشخصيات حسب أدق التفاصيل والمعارك.</p>
+                </div>
+                <div id="pro-feature-ads" class="animated-card p-6 rounded-xl flex flex-col items-center gap-4">
+                    <svg class="w-12 h-12 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v2h-2V7zm0 4h2v6h-2v-6z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-white">تجربة خالية من الإعلانات</h3>
+                    <p class="text-md text-gray-300 text-center">استمتع بالموسوعة دون أي مقاطعات.</p>
+                </div>
+                <div id="pro-feature-early-access" class="animated-card p-6 rounded-xl flex flex-col items-center gap-4">
+                    <svg class="w-12 h-12 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 8.5L16 12L10 15.5V8.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-white">وصول مبكر للمحتوى</h3>
+                    <p class="text-md text-gray-300 text-center">كن أول من يرى التحديثات والمقالات الجديدة قبل الجميع.</p>
+                </div>
+                <div id="pro-feature-gallery" class="animated-card p-6 rounded-xl flex flex-col items-center gap-4">
+                    <svg class="w-12 h-12 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4L8.5 14.5L11 17l4-4.5L19 17V4H8v12h12zm-4 4H4c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-2c0-1.1-.9-2-2-2H8z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-white">معرض فني عالي الدقة</h3>
+                    <p class="text-md text-gray-300 text-center">استمتع برسومات ون بيس بجودة لا مثيل لها.</p>
+                </div>
+                <div id="pro-feature-contact" class="animated-card p-6 rounded-xl flex flex-col items-center gap-4">
+                    <svg class="w-12 h-12 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V2zm-2 12H6v-2h12v2zm0-3H6V7h12v4z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-white">تواصل سلس مع منشأ الموقع</h3>
+                    <p class="text-md text-gray-300 text-center">تواصل مباشرة مع فريق التطوير لتقديم الاقتراحات والملاحظات.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Settings Button (Moved to bottom-left) -->
+    <button id="settings-button" class="fixed bottom-6 left-6 z-[1001] bg-gray-800 p-4 rounded-full shadow-lg border border-yellow-500 hover:bg-gray-700 transition transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        <svg id="settings-button-icon" class="w-8 h-8 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22L17.15 5.15c-.47-.35-.97-.67-1.5-.92l-.36-2.02c-.05-.24-.27-.42-.52-.42h-4c-.25 0-.47.18-.52.42l-.36 2.02c-.53.25-1.03.58-1.5.92L4.67 3.65c-.22-.08-.49 0-.61.22l-2 3.46c-.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.64-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.62-1.03c.47.35.97.67 1.5.92l.36 2.02c.05.24.27.42.52.42h4c.25 0 .47-.18.52-.42l.36-2.02c.53-.25 1.03-.58 1.5-.92l2.62 1.03c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+        </svg>
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top-button" class="flex items-center justify-center">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Modals and Popups -->
+    <!-- Card Details Modal -->
+    <div id="card-details-modal" class="card-details-modal-overlay">
+        <div class="card-details-modal-content scrollable-content">
+            <button id="card-details-close-button" class="close-button">&times;</button>
+            <h3 id="modal-title"></h3>
+            <div id="modal-content-details" class="text-right mt-6">
+                <!-- Content will be injected here -->
+            </div>
+            <button id="copy-details-button" class="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition transform hover:scale-105">
+                نسخ التفاصيل
+            </button>
+        </div>
+    </div>
+
+    <!-- Pro Required Modal (old, to be removed) -->
+    <div id="pro-required-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="pro-required-close-button" class="absolute top-4 left-4 text-4xl text-yellow-400 hover:text-white transition">&times;</button>
+            <h3 class="text-3xl font-extrabold text-red-400 mb-6 text-center">ميزة ونبيسي برو</h3>
+            <p class="text-lg text-gray-300 leading-relaxed text-center mb-8">
+                هذه الميزة حصرية لمشتركي ونبيسي برو. يرجى الاشتراك لتفعيلها!
+            </p>
+            <div class="flex justify-center">
+                <button id="pro-subscribe-button" class="button-glow px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-full transition transform hover:scale-105">
+                    اشترك الآن في ونبيسي برو
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="settings-close-button" class="absolute top-4 left-4 text-4xl text-yellow-400 hover:text-white transition">&times;</button>
+            <h3 class="text-3xl font-extrabold text-yellow-400 mb-6 text-center">الإعدادات</h3>
+            <div class="space-y-6 text-right">
+                <div class="setting-item">
+                    <span class="text-xl font-bold text-white">الخلفية:</span>
+                    <button id="theme-toggle" class="theme-toggle">داكن / فاتح</button>
+                </div>
+                <div class="setting-item">
+                    <span class="text-xl font-bold text-white">الصوت:</span>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5">
+                </div>
+                <div class="setting-item">
+                    <span class="text-xl font-bold text-white">جودة الرسوم المتحركة:</span>
+                    <button id="quality-toggle" class="quality-toggle">عالية / منخفضة</button>
+                </div>
+                <div class="setting-item">
+                    <span class="text-xl font-bold text-white">اللغة:</span>
+                    <span class="text-gray-400">العربية (قريباً المزيد)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-8">
+        <p class="footer-text">CREATED BY : ABDULLAH AL_SHIBLI</p>
+    </footer>
+
+    <script>
+        // Data Definitions
+        const proQuestions = [
+            { question: "من هو الشخصية الوحيدة التي تمكنت من إيقاف هجوم 'الهاكي الملكي' لشانكس في حرب المارينفورد؟", options: ["اللحية البيضاء", "أكاينو", "لا أحد", "سينجوكو"], correctAnswerIndex: 2 },
+            { question: "ما هو الاسم الكامل لفاكهة الشيطان التي أكلها مونكي دي لوفي، بعد الكشف عن اسمها الحقيقي؟", options: ["غومو غومو نو مي", "هيتو هيتو نو مي، نموذج: نيكا", "فاكهة المطاط الأسطورية", "فاكهة الشمس"], correctAnswerIndex: 1 },
+            { question: "ما هو اسم السلاح القديم الذي يُعتقد أنه يمتلك القدرة على تدمير العالم، والذي لم يتم الكشف عن شكله بعد؟", options: ["بلوتون", "بوسايدون", "أورانوس", "الون بيس"], correctAnswerIndex: 2 },
+            { question: "من هو الشخص الذي قام بتدريب زورو على استخدام الهاكي والسيافة خلال فترة السنتين؟", options: ["ريلي", "جول ميهوك", "شانكس", "فيستا"], correctAnswerIndex: 1 },
+            { question: "ما هو اسم العرق الذي ينتمي إليه 'الملك' (كينغ) من قراصنة الوحوش، والذي يُعتقد أنه انقرض؟", options: ["العمالقة", "اللوناريان", "المينك", "الدي"], correctAnswerIndex: 1 },
+            { question: "ما هو اسم الجزيرة التي تقع في 'الخط الأحمر' وتعتبر نقطة التقاء جميع خطوط الملاحة في العالم؟", options: ["إنيس لوبي", "ماريجوا", "رافتل", "لوغتاون"], correctAnswerIndex: 1 },
+            { question: "ما هو اسم فاكهة الشيطان التي أكلها مارشال دي تيتش (اللحية السوداء) أولاً، والتي تمنحه القدرة على امتصاص أي شيء؟", options: ["غورا غورا نو مي", "يامي يامي نو مي", "ميرا ميرا نو مي", "زوشي زوشي نو مي"], correctAnswerIndex: 1 },
+            { question: "ما هو اسم 'الهاكي' الذي يسمح للمستخدم برؤية المستقبل لفترة وجيزة؟", options: ["هاكي التسلح", "هاكي الملاحظة المتقدم", "هاكي الملكي", "هاكي التنبؤ"], correctAnswerIndex: 1 },
+            { question: "من هو الشخص الذي كان يُعرف بلقب 'الأسد الذهبي' وكان منافسًا لملك القراصنة غولد دي روجر؟", options: ["اللحية البيضاء", "شيكي", "كايدو", "بيغ مام"], correctAnswerIndex: 1 },
+            { question: "ما هو اسم المنظمة السرية التي تعمل تحت قيادة التنانين السماوية، وتُعرف بقدرتها على القتل والتستر على الجرائم؟", options: ["سايفر بول 0", "سايفر بول 9", "السيف السري", "السي بي 0"], correctAnswerIndex: 0 },
+            { question: "ما هو اسم فاكهة الشيطان التي أكلها ترافلغار لاو، والتي تمنحه القدرة على إنشاء 'غرفة' يمكنه فيها التلاعب بحرية؟", options: ["أوبي أوبي نو مي", "شيا شيا نو مي", "كيرا كيرا نو مي", "غورو غورو نو مي"], correctAnswerIndex: 0 },
+            { question: "ما هو اسم السيف الأسطوري الذي يمتلكه دراكيول ميهوك، ويعتبر أقوى سيف في العالم؟", options: ["إينما", "غريفون", "يورو", "وادو إيتشيمونجي"], correctAnswerIndex: 2 },
+            { question: "ما هو اسم العرق القديم الذي بنى البونغليف، والذي يُعتقد أنه تم إبادته من قبل الحكومة العالمية؟", options: ["العمالقة", "اللوناريان", "الدي", "المينك"], correctAnswerIndex: 2 },
+            { question: "ما هو اسم فاكهة الشيطان التي أكلتها تاما، والتي تسمح لها بإنشاء كعك الدانغو الذي يروض الحيوانات؟", options: ["كيبي كيبي نو مي", "دانغو دانغو نو مي", "أوا أوا نو مي", "فووا فووا نو مي"], correctAnswerIndex: 0 },
+            { question: "من هو الشخص الذي يُعرف بلقب 'بطل البحرية' وقد حاصر ملك القراصنة غولد دي روجر عدة مرات؟", options: ["أكاينو", "سينجوكو", "مونكي دي جارب", "أوكيجي"], correctAnswerIndex: 2 },
+            { question: "ما هو اسم الجزيرة التي شهدت معركة أكاينو وأوكيجي التي استمرت 10 أيام، وغيرت مناخ الجزيرة؟", options: ["بانك هازارد", "لونغ رينغ لونغ لاند", "مارينفورد", "إنيس لوبي"], correctAnswerIndex: 0 },
+            { question: "ما هو اسم السلاح القديم 'بوسايدون'، والذي تبين أنه ليس سلاحًا ماديًا بل كائن حي؟", options: ["سفينة حربية", "مخلوق بحري", "ملك البحار", "أميرة حورية البحر"], correctAnswerIndex: 3 },
+            { question: "ما هو اسم فاكهة الشيطان التي أكلها سينجوكو، والتي تسمح له بالتحول إلى تمثال بوذا ذهبي عملاق؟", options: ["هيشتو هيشتو نو مي، نموذج: بوذا", "داي داي نو مي", "غورو غورو نو مي", "ميرا ميرا نو مي"], correctAnswerIndex: 0 },
+            { question: "ما هو اسم الجزيرة التي تعتبر موطنًا لفاكهة الشيطان الاصطناعية (SMILEs)؟", options: ["دريسروزا", "وانو", "بانك هازارد", "إيغهيد"], correctAnswerIndex: 2 },
+            { question: "من هو العضو في قراصنة قبعة القش الذي كان يعمل في منظمة 'أعمال الباروك' تحت قيادة كروكودايل؟", options: ["رورونوا زورو", "نامي", "نيكو روبين", "سانجي"], correctAnswerIndex: 2 }
+        ];
+
+        const staticOnePieceCharacters = [
+            { name: "مونكي دي لوفي", englishName: "Luffy", strength: 950, appearanceFrequency: 990, analysis: "قائد قراصنة قبعة القش، يمتلك فاكهة المطاط (الآن فاكهة نيكا) وهاكي الملكي. معروف بشخصيته المبهجة وعزيمته التي لا تتزعزع.", past: "نشأ لوفي في قرية فوشا تحت رعاية جدّه مونكي دي جارب، وتأثر بشدة بالقرصان شانكس ذو الشعر الأحمر. بعد حادثة فاكهة الشيطان التي كسب فيها جسدًا مطاطيًا، قرر أن يصبح ملك القراصنة. التقى بإيس وسابو وأصبحوا إخوة بالقسم، مما شكل جزءًا كبيرًا من طفولته ودوافعه." },
+            { name: "رورونوا زورو", englishName: "Zoro", strength: 900, appearanceFrequency: 950, analysis: "سياف طاقم قبعة القش، يستخدم أسلوب الثلاثة سيوف. هدفه أن يصبح أعظم سياف في العالم. معروف بمهاراته القتالية الاستثنائية وحسه الضعيف بالاتجاهات.", past: "تدرب زورو منذ صغره في دوجو للسيوف، وكان يتنافس مع صديقته كوينا. بعد وفاتها المأساوية، وعدها بأن يصبح أعظم سياف في العالم. انضم إلى لوفي كأول عضو في طاقمه بعد أن أنقذه من الإعدام على يد البحرية." },
+            { name: "نامي", englishName: "Nami", strength: 300, appearanceFrequency: 900, analysis: "ملاحة طاقم قبعة القش، خبيرة في رسم الخرائط والتنبؤ بالطقس. ذكية ومحبة للمال، لكنها تهتم بشدة بأصدقائها.", past: "نشأت نامي في قرية كوكو، وتبنتها بلمير. عانت من استعباد قراصنة آرلونغ لقريتها، مما دفعها لسرقة القراصنة لجمع المال لشراء حريتها. بعد أن أنقذها لوفي، انضمت إليه لتحقيق حلمها برسم خريطة للعالم كله." },
+            { name: "اوسوب", englishName: "Usopp", strength: 250, appearanceFrequency: 850, analysis: "قناص طاقم قبعة القش، يتميز بمهاراته في القنص والاختراعات. جبان في البداية لكنه يظهر شجاعة كبيرة عند الحاجة.", past: "اوسوب هو قناص من قرية ساروب، اشتهر بالكذب ورواية القصص. كان يحلم بأن يصبح محاربًا شجاعًا مثل والده ياسوب. انضم إلى طاقم قبعة القش بعد أن ساعدهم في الدفاع عن قريته ضد القرصان كورو." },
+            { name: "سانجي", englishName: "Sanji", strength: 880, appearanceFrequency: 920, analysis: "طباخ طاقم قبعة القش، يستخدم أسلوب القتال بالقدمين. فارس نبيل مع النساء، ويحلم بإيجاد أول بلو.", past: "نشأ سانجي في مطعم بحري بعد أن أنقذه القرصان زيف. تعلم منه الطهي وأسلوب القتال بالقدمين. انضم إلى طاقم لوفي لتحقيق حلمه بإيجاد أول بلو، البحر الأسطوري الذي يجمع جميع أنواع الأسماك." },
+            { name: "توني توني تشوبر", englishName: "Chopper", strength: 400, appearanceFrequency: 800, analysis: "طبيب طاقم قبعة القش، حيوان رنة أكل فاكهة الإنسان. لطيف وبريء، يمكنه التحول إلى أشكال مختلفة باستخدام الرامبل بول.", past: "كان تشوبر رنة منبوذة بسبب أنفه الأزرق وقدرته على الكلام بعد أكل فاكهة الشيطان. تم تدريبه كطبيب على يد الدكتور هيلولوك والدكتورة كوريها. انضم إلى طاقم لوفي لتحقيق حلمه بأن يصبح طبيبًا قادرًا على علاج جميع الأمراض." },
+            { name: "نيكو روبين", englishName: "Robin", strength: 600, appearanceFrequency: 780, analysis: "عالمة آثار طاقم قبعة القش، أكلت فاكهة الزهور. هادئة وذكية، وتبحث عن التاريخ الحقيقي للعالم.", past: "نجت روبين من تدمير جزيرة أوهارا، موطنها، وهي طفلة صغيرة. قضت حياتها هاربة من الحكومة العالمية، مما دفعها لسرقة القراصنة لجمع المال لشراء حريتها. بعد أن أنقذها لوفي، انضمت إليه لتحقيق حلمها برسم خريطة للعالم كله." },
+            { name: "فرانكي", englishName: "Franky", strength: 750, appearanceFrequency: 700, analysis: "نجار سفينة طاقم قبعة القش، سايبورغ قوي ومبدع. بنى سفينة 'صني الألفية' ويحلم ببناء سفينة قادرة على الإبحار حول العالم.", past: "كان فرانكي متدربًا لدى توم، أفضل نجار سفن في العالم. بعد وفاة توم، قام فرانكي بتحويل نفسه إلى سايبورغ. انضم إلى طاقم لوفي بعد أحداث إينيس لوبي، وبنى لهم سفينة الأحلام 'صني الألفية'." },
+            { name: "بروك", englishName: "Brook", strength: 650, appearanceFrequency: 680, analysis: "موسيقي طاقم قبعة القبعة، هيكل عظمي أكل فاكهة الروح. يتمتع بحس فكاهي فريد ومهارات سيافية وموسيقية.", past: "كان بروك موسيقيًا في طاقم قراصنة رومبار، الذين ماتوا جميعًا بسبب مرض. بعد أن أكل فاكهة الروح، عاد إلى الحياة كهيكل عظمي. انضم إلى لوفي لتحقيق وعده لصديقه الحوت لابون." },
+            { name: "جينبي", englishName: "Jinbe", strength: 870, appearanceFrequency: 650, analysis: "ربان طاقم قبعة القش، رجل سمكة قوي وخبير في فنون قتال الكاراتيه لرجال السمكة. معروف بشرفه وولائه.", past: "كان جينبي عضوًا في قراصنة الشمس، ثم أصبح تشيبوكاي. ضحى بسمعته من أجل حماية جزيرة السمكة. انضم إلى لوفي بعد أحداث حرب القمة، ليصبح ربان سفينة قبعة القش." },
+            { name: "شانكس", englishName: "Shanks", strength: 990, appearanceFrequency: 400, analysis: "أحد الأباطرة الأربعة، قرصان قوي وملهم للوفي. يمتلك هاكي ملكي هائل ويحظى باحترام كبير في العالم.", past: "كان شانكس متدربًا على سفينة ملك القراصنة روجر. فقد ذراعه لإنقاذ لوفي، وأعطاه قبعة القش الشهيرة. يعتبر من أقوى الشخصيات في العالم ويحظى باحترام كبير." },
+            { name: "بلاكبيرد (مارشال دي تيتش)", englishName: "Blackbeard", strength: 980, appearanceFrequency: 380, analysis: "أحد الأباطرة الأربعة، يمتلك فاكهتي شيطان (الظلام والزلزال). شخصية غامضة ومخادعة، ويسعى ليصبح ملك القراصنة.", past: "كان تيتش عضوًا في قراصنة اللحية البيضاء، لكنه خانهم لسرقة فاكهة الظلام. أسس طاقمه الخاص وأصبح يونكو. معروف بخططه الماكرة وقوته المدمرة." },
+            { name: "كايدو", englishName: "Kaido", strength: 1000, appearanceFrequency: 350, analysis: "أحد الأباطرة الأربعة السابقين، معروف بكونه 'أقوى مخلوق في العالم'. يمتلك فاكهة التنين الأسطوري وقدرة تحمل لا تصدق.", past: "كان كايدو عضوًا في قراصنة روكس، ثم أصبح يونكو. حاول الانتحار عدة مرات لكنه فشل. كان يحكم وانو بقبضة من حديد ويسعى لخلق حرب عالمية." },
+            { name: "بيغ مام (شارلوت لينلين)", englishName: "Big Mom", strength: 970, appearanceFrequency: 360, analysis: "إمبراطورة سابقة، قائدة قراصنة بيغ مام. تمتلك فاكهة الروح وتتحكم في الطقس باستخدام أرواحها.", past: "نشأت بيغ مام في دار أيتام، وكانت تمتلك قوة جسدية هائلة منذ صغرها. أكلت فاكهة الروح عن طريق الخطأ. أسست إمبراطوريتها الخاصة وتزوجت عدة مرات لإنشاء عائلة ضخمة." },
+            { name: "أكاينو (ساكازوكي)", englishName: "Akainu", strength: 960, appearanceFrequency: 300, analysis: "الأدميرال الحالي للبحرية، يمتلك فاكهة اللافا. معروف بعدالته المطلقة وقوته المدمرة.", past: "كان أكاينو أحد الأدميرالات الثلاثة، وشارك في حرب المارينفورد. أصبح أدميرال الأسطول بعد هزيمته لأوكيجي. معروف بعدالته المتطرفة التي لا ترحم." },
+            { name: "أوكيجي (كوزان)", englishName: "Aokiji", strength: 940, appearanceFrequency: 280, analysis: "أدميرال سابق في البحرية، يمتلك فاكهة الثلج. شخصية هادئة وغامضة، عدالته 'عدالة كسولة'.", past: "كان أوكيجي أحد الأدميرالات الثلاثة، وترك البحرية بعد هزيمته أمام أكاينو. شخصية غامضة، ويعتقد أنه يعمل الآن مع قراصنة اللحية السوداء." },
+            { name: "كيزارو (بورسالينو)", englishName: "Kizaru", strength: 930, appearanceFrequency: 290, analysis: "أدميرال في البحرية، يمتلك فاكهة الضوء. معروف بسرعته الخارقة وشخصيته المسترخية.", past: "كيزارو هو أحد الأدميرالات الحاليين، ويستخدم فاكهة الضوء التي تمنحه سرعة الضوء. شخصيته تبدو مسترخية وغير مبالية، لكنه قوي وخطير للغاية." },
+            { name: "مونكي دي دراغون", englishName: "Dragon", strength: 1000, appearanceFrequency: 150, analysis: "زعيم الجيش الثوري وأخ لوفي، يعتبر أخطر رجل في العالم. يهدف إلى الإطاحة بالحكومة العالمية.", past: "ماضي دراغون غامض، لكنه ترك البحرية ليؤسس الجيش الثوري. يهدف إلى تغيير العالم ويقود ثورة ضد الحكومة العالمية. هو والد لوفي وابن جارب." },
+            { name: "سابو", englishName: "Sabo", strength: 910, appearanceFrequency: 250, analysis: "الساعد الأيمن لدراغون وأخ لوفي بالقسم، يمتلك فاكهة النار-النار. يسعى لتحقيق الحرية للعالم.", past: "اعتقد لوفي وإيس أن سابو قد مات في طفولته. لكنه نجا وانضم إلى الجيش الثوري. استعاد ذاكرته في دريسروزا وأكل فاكهة إيس بعد وفاته، ليصبح وريث إرادته." },
+            { name: "بورتغاس دي إيس", englishName: "Ace", strength: 890, appearanceFrequency: 220, analysis: "أخ لوفي بالقسم وابن ملك القراصنة روجر، يمتلك فاكهة فاكهة النار-النار. شخصية متهورة ومخلصة.", past: "إيس هو ابن ملك القراصنة غولد دي روجر. نشأ مع لوفي وسابو وأصبحوا إخوة بالقسم. انضم إلى قراصنة اللحية البيضاء وأصبح قائد الفرقة الثانية. تم أسره وإعدامه في حرب المارينفورد، مما أثر بشكل كبير على لوفي." },
+            { name: "مونكي دي جارب", englishName: "Garp", strength: 950, appearanceFrequency: 200, analysis: "نائب أدميرال في البحرية ووالد دراغون وجد لوفي، معروف بلقب 'بطل البحرية'. قوي للغاية ويتمتع بقوة جسدية هائلة.", past: "جارب هو بطل البحرية الذي حاصر ملك القراصنة روجر عدة مرات. رفض أن يصبح أدميرالًا للحفاظ على حريته. قام بتربية لوفي وإيس، وله شخصية قوية ومرحة." },
+            { name: "سينجوكو", englishName: "Sengoku", strength: 930, appearanceFrequency: 180, analysis: "أدميرال الأسطول السابق في البحرية، يمتلك فاكهة البوذا. قائد استراتيجي ذكي وقوي.", past: "كان سينجوكو أدميرال الأسطول خلال حقبة ملك القراصنة. شارك في العديد من الأحداث الرئيسية، بما في ذلك حرب المارينفورد. بعد الحرب، تقاعد من منصبه." },
+            { name: "دراكيول ميهوك", englishName: "Mihawk", strength: 980, appearanceFrequency: 160, analysis: "أعظم سياف في العالم ولقبه 'عين الصقر'. يعتبر خصم زورو اللدود ومعلمه.", past: "ميهوك هو سياف غامض وقوي للغاية، ويعتبر الأفضل في العالم. يتجول بمفرده ويقبل تحديات السيافين. قام بتدريب زورو خلال فترة السنتين." },
+            { name: "بارثولوميو كوما", englishName: "Kuma", strength: 850, appearanceFrequency: 140, analysis: "سايبورغ وعضو سابق في التشيبوكاي، يمتلك فاكهة الدفع. شخصية غامضة وله دور محوري في القصة.", past: "كان كوما ملكًا سابقًا وعضوًا في الجيش الثوري، ثم أصبح تشيبوكاي. خضع لتعديلات ليصبح سايبورغ كاملًا. ضحى بنفسه لإنقاذ طاقم قبعة القش في أرخبيل سابودي." },
+            { name: "بوا هانكوك", englishName: "Hancock", strength: 800, appearanceFrequency: 130, analysis: "إمبراطورة الأمازون ليلي وعضوة سابقة في التشيبوكاي، تقع في حب لوفي. تمتلك فاكهة الحب.", past: "كانت هانكوك وأخواتها عبدات سابقات للتنانين السماوية. بعد تحررها، أصبحت إمبراطورة الأمازون ليلي. وقعت في حب لوفي بعد أن أظهر لها طيبته." },
+            { name: "ترافلغار دي واتر لاو", englishName: "Law", strength: 890, appearanceFrequency: 270, analysis: "قائد قراصنة القلب، طبيب وجراح ماهر. يمتلك فاكهة الغرفة (أوبي أوبي نو مي) ولديه خطط سرية.", past: "نجا لاو من مدينة فليوانس المدمرة. تم إنقاذه من قبل كورازون (روسينانت)، الذي ضحى بحياته من أجله. أصبح طبيبًا وقرصانًا، ويسعى للانتقام من دوفلامينغو." },
+            { name: "يوستاس كيد", englishName: "Kid", strength: 870, appearanceFrequency: 240, analysis: "قائد قراصنة كيد، يمتلك فاكهة المغناطيس. شخصية عنيفة وطموحة، ويسعى للإطاحة بالأباطرة.", past: "كيد هو قرصان من الجيل الأسوأ، معروف بعنفه. فقد ذراعه في العالم الجديد. تحالف مع لاو ولوفي في وانو للإطاحة بكايدو." },
+            { name: "جوليري بوني", englishName: "Bonney", strength: 700, appearanceFrequency: 90, analysis: "قرصانة من الجيل الأسوأ، تمتلك فاكهة العمر. غامضة وتبحث عن شيء متعلق بـ 'اللحية البيضاء'.", past: "ماضي بونني غامض، لكنها تبحث عن شخص معين أو حقيقة متعلقة بـ 'اللحية البيضاء'. يمكنها تغيير عمرها وعمر الآخرين." },
+            { name: "أوروج", englishName: "Urouge", strength: 720, appearanceFrequency: 85, analysis: "راهب سماوي من الجيل الأسوأ، يمتلك فاكهة تكبير الضرر. قوي جسدياً ويتمتع بقدرة تحمل عالية.", past: "أوروج هو راهب غامض من السماء، يمتلك القدرة على تحويل الضرر الذي يتلقاه إلى قوة جسدية. يسعى للوصول إلى رافتل." },
+            { name: "إكس دريك", englishName: "X Drake", strength: 820, appearanceFrequency: 110, analysis: "قائد قراصنة دريك وعميل سري للبحرية، يمتلك فاكهة الديناصور. شخصية معقدة ومخلصة لمبادئه.", past: "كان دريك ابنًا لقائد بحرية، ثم أصبح قرصانًا وعميلًا سريًا للبحرية. انضم إلى قراصنة كايدو كجاسوس." },
+            { name: "كيلر", englishName: "Killer", strength: 810, appearanceFrequency: 105, analysis: "الساعد الأيمن لقراصنة كيد، يستخدم مناجل دوارة. مقاتل ماهر وذكي.", past: "كيلر هو الساعد الأيمن لكيد وصديقه المقرب. يرتدي قناعًا ولا يكشف عن وجهه. مقاتل ماهر وذكي." },
+            { name: "كابوني بيج", englishName: "Bege", strength: 780, appearanceFrequency: 95, analysis: "قائد قراصنة فاير تانك، يمتلك فاكهة القلعة. رجل مافيا يخطط دائمًا ويتحول إلى قلعة حية.", past: "بيج هو قائد عصابة مافيا، يمتلك فاكهة تسمح له بتحويل جسده إلى قلعة. تحالف مع لوفي في مناسبات مختلفة." },
+            { name: "بازيل هوكينز", englishName: "Hawkins", strength: 790, appearanceFrequency: 98, analysis: "قائد قراصنة هوكينز، يمتلك فاكهة القش. يمكنه التنبؤ بالمستقبل واستخدام الدمى القشية.", past: "هوكينز هو قرصان من الجيل الأسوأ، يمكنه التنبؤ بمصيره ومصير الآخرين. يستخدم الدمى القشية لتحويل الضرر إليه." },
+            { name: "فوجيتورا (إيشو)", englishName: "Fujitora", strength: 920, appearanceFrequency: 120, analysis: "أدميرال في البحرية، يمتلك فاكهة الجاذبية. أعمى ولكنه يرى العالم بقلبه، ويؤمن بالعدالة الحقيقية.", past: "فوجيتورا هو أدميرال في البحرية، اختار أن يعمي نفسه لكي لا يرى الشر في العالم. يمتلك فاكهة الجاذبية ويسعى لتحقيق عدالة حقيقية." },
+            { name: "ريوكوجيو (أراماكي)", englishName: "Ryokugyu", strength: 915, appearanceFrequency: 70, analysis: "أدميرال في البحرية، يمتلك فاكهة النباتات. قوي للغاية ويستطيع التحكم بالنباتات.", past: "ريوكوجيو هو أدميرال غامض في البحرية، لم يظهر وجهه بالكامل بعد. يمتلك فاكهة تسمح له بالتحكم بالنباتات." },
+            { name: "ياماماتو", englishName: "Yamato", strength: 940, appearanceFrequency: 100, analysis: "ابن كايدو، والذي يعتبر نفسه كوزوكي أودين. يمتلك فاكهة زون أسطورية ويستخدم الكانابو. مقاتل قوي ذو حس عدالة قوي.", past: "ياماماتو هو ابن كايدو، والذي يعشق كوزوكي أودين ويتمنى تحقيق إرادته. تم سجنه من قبل كايدو لسنوات لكنه تحرر في النهاية وساعد قراصنة قبعة القش في وانو. ياماماتو يحلم بالإبحار في البحار مثل أودين." }
+        ];
+
+        const arcsData = [
+            { id: 1, name: "آرك الأزرق الشرقي", icon: "🌊", summary: "بداية مغامرة لوفي لتكوين طاقمه، ولقائه بزورو ونامي وأوسوب وسانجي. يواجهون قراصنة أقوياء مثل باغي وآرلونغ، مما يضع أسس صداقتهم وأهدافهم الكبرى بحثًا عن ون بيس." },
+            { id: 2, name: "آرك ألاباستا", icon: "🏜️", summary: "ينطلق الطاقم لمساعدة الأميرة فيفي في إنقاذ مملكة ألاباستا من منظمة أعمال الباروك بقيادة التشيبوكاي كروكودايل. يواجهون تحديات الصحراء ومعارك حاسمة، ويكتشفون أسرار البونغليف." },
+            { id: 3, name: "آرك سكايبيا", icon: "☁️", summary: "يصل الطاقم إلى جزيرة السماء الغامضة، ويواجهون الإله إينيل وقوته التدميرية. يستكشفون حضارة قديمة، ويكتشفون تاريخًا مشتركًا بين سكايبيا والبحر الأزرق، ويحققون حلم لوفي بالوصول إلى السماء." },
+            { id: 4, name: "آرك ووتر سفن / إنيس لوبي", icon: "🚢", summary: "أحد أكثر الآركات درامية، حيث يواجه الطاقم تحديات داخلية وخارجية. تنفصل روبين عن الطاقم، ويواجهون منظمة سايفر بول 9 القوية لإنقاذها. يضحون بسفينتهم 'غوينغ ميري'، ويكتسبون سفينة جديدة." },
+            { id: 5, name: "آرك ثريلر بارك", icon: "👻", summary: "يصل الطاقم إلى أكبر سفينة في العالم، ثريلر بارك، التي يسيطر عليها التشيبوكاي غيكو موريا. يواجهون الزومبي والأشباح، ويكتشفون أسرار الظلال، وينقذون بروك لينضم إلى طاقمهم." },
+            { id: 6, name: "آرك أرخبيل سابودي", icon: "🌳", summary: "يصل الطاقم إلى الأرخبيل قبل دخول العالم الجديد، ويواجهون التنانين السماوية والبحرية. يتعرضون لهزيمة ساحقة على يد كوما، ويتفرق الطاقم للتدرب بشكل فردي." },
+            { id: 7, name: "آرك إمبل داون", icon: "⛓️", summary: "يتسلل لوفي إلى سجن إمبل داون لإنقاذ أخيه إيس، ويواجه تحديات هائلة في كل مستوى من مستويات السجن. يلتقي بحلفاء جدد ويخلق فوضى عارمة في أكثر سجون العالم حراسة." },
+            { id: 8, name: "آرك المارينفورد", icon: "⚔️", summary: "حرب شاملة بين قراصنة اللحية البيضاء والبحرية لإنقاذ إيس. يشارك لوفي والعديد من الشخصيات القوية. تعتبر هذه الحرب نقطة تحول كبرى في عالم ون بيس، حيث غيرت ميزان القوى." },
+            { id: 9, name: "آرك جزيرة اليوجين", icon: "🐠", summary: "يصل الطاقم إلى جزيرة اليوجين تحت الماء، ويواجهون تهديدًا جديدًا من هودي جونز. يكتشفون تاريخًا مظلمًا بين البشر واليوجين، ويلتقون بالسلاح القديم بوسايدون." },
+            { id: 10, name: "آرك بانك هازارد", icon: "🧪", summary: "يهبط الطاقم على جزيرة بانك هازارد، وهي أرض مقسمة بين الجليد والنار بسبب معركة بين الأدميرالات. يكتشفون تجارب سيزار كلاون الشريرة ويتعاونون مع لاو لإيقاف إنتاج فواكه الشيطان الاصطناعية." },
+            { id: 11, name: "آرك دريسروزا", icon: "🎭", summary: "يتورط الطاقم في صراع مع التشيبوكاي دوفلامينغو في مملكة دريسروزا. يكشفون مؤامراته، ويحررون المملكة من سيطرته، ويلتقون بسابو مرة أخرى، ويكتسبون حلفاء جدد." },
+            { id: 12, name: "آرك زو", icon: "🐘", summary: "يصل الطاقم إلى جزيرة زو، التي تقع على ظهر فيل عملاق. يكتشفون قصة قبيلة المينك، ويتعلمون عن البونغليف الأحمر (رود بونغليف)، ويواجهون جاك، أحد كوارث كايدو." },
+            { id: 13, name: "آرك جزيرة الكعكة الكاملة", icon: "🍰", summary: "يتسلل لوفي وطاقمه إلى أراضي بيغ مام لإنقاذ سانجي. يواجهون تحديات عائلية ومعارك شرسة، ويكشفون أسرار بيغ مام وماضي سانجي." },
+            { id: 14, name: "آرك وانو", icon: "🌸", summary: "يصل الطاقم إلى وانو، أرض الساموراي، للتحالف مع الساموراي لإسقاط كايدو وشوغون وانو. يواجهون أقوى خصومهم في معارك ملحمية، ويكشفون أسرار عائلة كوزوكي." },
+            { id: 15, name: "آرك إيغهيد", icon: "🔬", summary: "يصل الطاقم إلى جزيرة إيغهيد، معقل العالم العبقري فيغابانك. يكتشفون تقنيات متقدمة، ويواجهون تحديات جديدة من البحرية والسايفر بول، ويكشفون أسرار العالم القديم." }
+        ];
+
+        const theoriesData = [
+            { id: 1, title: "الهوية الحقيقية لإيمو ساما", icon: "👑", summary: "تفترض هذه النظرية أن إيمو ساما ليس مجرد حاكم، بل كائن خالد أو يمتلك قوة فاكهة شيطان تسمح له بالتلاعب بالوقت أو الوجود نفسه، مما يفسر سيطرته المطلقة على العالم لقرون." },
+            { id: 2, title: "الون بيس هو التاريخ المفقود", icon: "📜", summary: "تشير هذه النظرية إلى أن كنز الون بيس ليس ذهبًا ماديًا أو ثروات، بل الحقيقة الكاملة للتاريخ المفقود للعالم، بما في ذلك القرن المفقود، والأسلحة القديمة، وأصل فواكه الشيطان، والتي يمكن أن تغير العالم إلى الأبد." },
+            { id: 3, title: "فاكهة الشيطان الحقيقية للوفي (نيكا)", icon: "☀️", summary: "اقترحت هذه النظرية أن فاكهة لوفي لم تكن مجرد فاكهة مطاط، بل فاكهة أسطورية مرتبطة بإله الشمس نيكا، تمنحه قوى التحرير والقدرة على جلب الابتسامات للناس." },
+            { id: 4, title: "السلاح القديم بلوتون وموقعه", icon: "⚓", summary: "تتنبأ هذه النظرية بموقع السلاح القديم بلوتون، وهي سفينة حربية قادرة على تدمير الجزر. يعتقد البعض أنها مدفونة تحت وانو، وأنها ستلعب دورًا حاسمًا في الحرب النهائية." },
+            { id: 5, title: "أصل النبلاء العالميين", icon: "🐉", summary: "تستكشف هذه النظرية الأصول الحقيقية للنبلاء العالميين (التنانين السماوية)، وكيف حققوا السلطة المطلقة، ودورهم في الأحداث التاريخية الكبرى التي أدت إلى تشكيل حكومة العالم." },
+            { id: 6, title: "نظرية إرادة الـ D", icon: "👁️", summary: "تفترض هذه النظرية أن حرف D في أسماء بعض الشخصيات لا يرمز فقط إلى اسم عائلة، بل إلى إرادة قوية تنتقل عبر الأجيال لمواجهة حكومة العالم والتنانين السماوية، ويعتقد أنها مرتبطة بالقرن المفقود." }
+        ];
+        
+        const fruitsData = [
+            { id: 1, name: "غومو غومو نو مي (نيكا)", user: "مونكي دي لوفي", type: "zoan", summary: "فاكهة نموذج إله الشمس الأسطورية، تمنح مستخدمها جسدًا مرنًا مثل المطاط، وقوة إيقاظ تتيح التلاعب بالواقع." },
+            { id: 2, name: "ميرا ميرا نو مي", user: "بورتغاس دي إيس (لاحقًا سابو)", type: "logia", summary: "فاكهة عنصر النار، تمنح مستخدمها القدرة على التحول إلى نار والتحكم بها، مما يجعل الهجمات الجسدية غير فعالة." },
+            { id: 3, name: "يامي يامي نو مي", user: "مارشال دي تيتش", type: "logia", summary: "فاكهة الظلام، تعتبر فريدة من نوعها وتسمح للمستخدم بالتحكم في الجاذبية والظلام، مما يمكنه من امتصاص الهجمات والقوى الأخرى." },
+            { id: 4, name: "هييه هييه نو مي", user: "أوكيجي", type: "logia", summary: "فاكهة عنصر الجليد، تمنح مستخدمها القدرة على إنشاء الجليد والتحكم به، مما يسمح له بتجميد أي شيء يلمسه." },
+            { id: 5, name: "ماجو ماجو نو مي", user: "أكاينو", type: "logia", summary: "فاكهة عنصر الحمم، تمنح مستخدمها القدرة على إنشاء الحمم البركانية والتحكم بها، مما يجعلها واحدة من أقوى الفواكه الهجومية." },
+            { id: 6, name: "بيكا بيكا نو مي", user: "كيزارو", type: "logia", summary: "فاكهة عنصر الضوء، تمنح مستخدمها القدرة على التحول إلى ضوء والتحرك بسرعة الضوء، بالإضافة إلى إطلاق أشعة الليزر." },
+            { id: 7, name: "أوبي أوبي نو مي", user: "ترافلغار دي واتر لاو", type: "paramecia", summary: "فاكهة تسمح للمستخدم بإنشاء 'غرفة' يمكنه فيها التلاعب بحرية بأي شيء داخلها، مثل قطع الأجسام أو تغيير مواقعها." },
+            { id: 8, name: "جيشي جيشي نو مي", user: "يوستاس كيد", type: "paramecia", summary: "فاكهة المغناطيس، تمنح مستخدمها القدرة على جذب أو صد الأجسام المعدنية." },
+            { id: 9, name: "هاانا هاانا نو مي", user: "نيكو روبين", type: "paramecia", summary: "فاكهة الزهور، تمنح مستخدمها القدرة على إنبات أجزاء من جسدها في أي مكان آخر." },
+            { id: 10, name: "سورو سورو نو مي", user: "بيغ مام", type: "paramecia", summary: "فاكهة الروح، تسمح لمستخدمها باستخلاص الأرواح من الكائنات الحية واستخدامها لإنشاء 'أومنيوم' حي." },
+            { id: 11, name: "زوشي زوشي نو مي", user: "فوجيتورا", type: "paramecia", summary: "فاكهة الجاذبية، تمنح مستخدمها القدرة على التحكم في الجاذبية، مما يسمح له بسحب الأجسام أو دفعها بقوة." },
+            { id: 12, name: "هيتو هيتو نو مي (نموذج: بوذا)", user: "سينجوكو", type: "zoan", summary: "فاكهة بشرية من نوع زون الأسطوري، تسمح لمستخدمها بالتحول إلى تمثال بوذا ذهبي عملاق، مما يزيد من قوته الجسدية." },
+            { id: 13, name: "هيتو هيتو نو مي (نموذج: نيكا)", user: "مونكي دي لوفي", type: "zoan", summary: "فاكهة بشرية من نوع زون الأسطوري، تمنح مستخدمها بالتحول إلى إله الشمس نيكا، وتمنحه جسدًا مطاطيًا وقوة إيقاظ للتلاعب بالواقع." },
+            { id: 14, name: "هيتو هيتو نو مي (نموذج: إنسان)", user: "توني توني تشوبر", type: "zoan", summary: "فاكهة بشرية، تسمح لحيوان الرنة تشوبر بالتحول إلى إنسان أو هجين إنسان ورنة." },
+            { id: 15, name: "بورو بورو نو مي", user: "كابوني بيج", type: "paramecia", summary: "فاكهة القلعة، تمنح مستخدمها القدرة على جعل جسده قلعة حية يمكن للأشخاص دخولها والتحصين بداخلها." },
+            { id: 16, name: "سونا سونا نو مي", user: "كروكودايل", type: "logia", summary: "فاكهة عنصر الرمل، تمنح مستخدمها القدرة على التحول إلى رمل والتحكم به، مما يسمح له بتجفيف الأجسام باللمس." },
+            { id: 17, name: "سيكو سيكو نو مي", user: "جوليري بوني", type: "paramecia", summary: "فاكهة العمر، تمنح مستخدمها القدرة على التلاعب بعمر الكائنات الحية، إما بتجديد شبابها أو تسريع شيخوختها." },
+            { id: 18, name: "باكوري باكوري نو مي", user: "وابول", type: "paramecia", summary: "فاكهة الالتهام، تسمح لمستخدمها بأكل أي شيء (عضوي أو غير عضوي) ودمجه مع جسده أو إعادة تشكيله." }
+        ];
+
+        const characterIcons = {
+            "Luffy": '👒', // Straw Hat
+            "Zoro": '⚔️', // Swords
+            "Nami": '💰', // Tangerine
+            "Usopp": '🎯', // Target/Slingshot
+            "Sanji": '👞', // Shoe/Kick
+            "Chopper": '🌸', // Cherry Blossom
+            "Robin": '🌺', // Flower
+            "Franky": '⭐', // Star
+            "Brook": '🎻', // Violin
+            "Jinbe": '🐠', // Fish
+            "Shanks": '⚓', // Anchor
+            "Blackbeard": '💀', // Skull
+            "Kaido": '🐉', // Dragon
+            "Big Mom": '🍰', // Cake
+            "Akainu": '🔥', // Fire
+            "Aokiji": '🧊', // Ice
+            "Kizaru": '⚡', // Lightning
+            "Dragon": '🌪️', // Tornado/Wind
+            "Sabo": '🔥', // Fire
+            "Ace": '🔥', // Fire
+            "Garp": '👊', // Fist
+            "Sengoku": '⚖️', // Scales/Justice
+            "Mihawk": '🦅', // Eagle eye
+            "Kuma": '🐾', // Paw
+            "Hancock": '💖', // Heart
+            "Law": '⚕️', // Medical staff
+            "Kid": '⛓️', // Chains
+            "Bonney": '⏳', // Hourglass
+            "Urouge": '🙏', // Prayer
+            "X Drake": '🦖', // T-rex
+            "Killer": '🌀', // Whirlpool
+            "Bege": '🏰', // Castle
+            "Hawkins": '🃏', // Joker
+            "Fujitora": '☄️', // Meteor
+            "Ryokugyu": '🌿', // Plant
+            "Yamato": '👹' // Oni mask
+        };
+        
+        const fruitIcons = {
+            "غومو غومو نو مي (نيكا)": '☀️',
+            "ميرا ميرا نو مي": '🔥',
+            "يامي يامي نو مي": '🌑',
+            "هييه هييه نو مي": '❄️',
+            "ماجو ماجو نو مي": '🌋',
+            "بيكا بيكا نو مي": '💡',
+            "أوبي أوبي نو مي": '⚕️',
+            "جيشي جيشي نو مي": '🧲', // Changed from '?' to '🧲'
+            "هاانا هاانا نو مي": '🌸',
+            "سورو سورو نو مي": '👻',
+            "زوشي زوشي نو مي": '⚫', // Black hole for gravity
+            "هيتو هيتو نو مي (نموذج: بوذا)": '🙏',
+            "هيتو هيتو نو مي (نموذج: نيكا)": '☀️',
+            "هيتو هيتو نو مي (نموذج: إنسان)": '🧑',
+            "بورو بورو نو مي": '🏰',
+            "سونا سونا نو مي": '⏳',
+            "سيكو سيكو نو مي": '👵', // Hourglass or old person for aging
+            "باكوري باكوري نو مي": '🍎' // Apple for eating
+        };
+
+
+        // Global State Variables
+        let isProActivated = false;
+        let characterData = [];
+        let shuffledQuestions = [];
+        let currentQuestionIndex = 0;
+        let correctAnswersCount = 0;
+        let questionAnswered = false;
+        let animationsEnabled = true; // New setting for animation quality
+
+        // Tone.js setup for sound effects
+        let synth, successSynth, failureSynth, cardOpenSound, cardCloseSound, filterSound, settingsSound;
+        
+        // Function Definitions
+        function initializeAudioContext() {
+            // Initialize the sound effects on user interaction to bypass browser autoplay policy
+            if (Tone.context.state !== 'running') {
+                Tone.start();
+            }
+            if (!synth) {
+                synth = new Tone.Synth({
+                    oscillator: { type: 'sine' },
+                    envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 }
+                }).toDestination();
+            }
+            if (!successSynth) {
+                successSynth = new Tone.MembraneSynth().toDestination();
+            }
+            if (!failureSynth) {
+                failureSynth = new Tone.NoiseSynth({
+                    envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 }
+                }).toDestination();
+            }
+            if (!cardOpenSound) {
+                cardOpenSound = new Tone.PluckSynth().toDestination();
+            }
+            if (!cardCloseSound) {
+                cardCloseSound = new Tone.Synth({
+                    oscillator: { type: 'triangle' },
+                    envelope: { attack: 0.01, decay: 0.05, sustain: 0.01, release: 0.1 }
+                }).toDestination();
+            }
+            if (!filterSound) {
+                filterSound = new Tone.Synth({
+                    oscillator: { type: 'sawtooth' },
+                    envelope: { attack: 0.01, decay: 0.05, sustain: 0.01, release: 0.05 }
+                }).toDestination();
+            }
+            if (!settingsSound) {
+                settingsSound = new Tone.PolySynth(Tone.Synth).toDestination();
+            }
+        }
+
+        // Explicitly define functions on the window object to ensure global accessibility
+        window.playClickSound = function() {
+            if (synth && animationsEnabled) {
+                synth.triggerAttackRelease('C4', '8n');
+            }
+        }
+
+        window.playSuccessSound = function() {
+            if (successSynth && animationsEnabled) {
+                successSynth.triggerAttackRelease('C2', '8n');
+            }
+        }
+
+        window.playFailureSound = function() {
+            if (failureSynth && animationsEnabled) {
+                failureSynth.triggerAttackRelease('16n');
+            }
+        }
+
+        window.playCardOpenSound = function() {
+            if (cardOpenSound && animationsEnabled) {
+                cardOpenSound.triggerAttackRelease('G4', '8n');
+            }
+        }
+
+        window.playCardCloseSound = function() {
+            if (cardCloseSound && animationsEnabled) {
+                cardCloseSound.triggerAttackRelease('D4', '16n');
+            }
+        }
+
+        window.playFilterSound = function() {
+            if (filterSound && animationsEnabled) {
+                filterSound.triggerAttackRelease('E5', '32n');
+            }
+        }
+
+        window.playSettingsSound = function() {
+            if (settingsSound && animationsEnabled) {
+                settingsSound.triggerAttackRelease(['C5', 'E5', 'G5'], '8n');
+            }
+        }
+
+
+        window.shuffleArray = function(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Function to render loading skeletons
+        function renderLoadingSkeletons(containerId, count) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = ''; // Clear existing content
+            for (let i = 0; i < count; i++) {
+                const skeleton = document.createElement('div');
+                skeleton.className = 'skeleton-card';
+                skeleton.innerHTML = `
+                    <div class="skeleton-card-icon"></div>
+                    <div class="skeleton-card-title"></div>
+                    <div class="skeleton-card-button"></div>
+                `;
+                container.appendChild(skeleton);
+            }
+        }
+
+        window.renderCharacters = function(charactersToRender) {
+            const container = document.getElementById('characters-container');
+            container.innerHTML = '';
+            charactersToRender.forEach((character, index) => {
+                const card = document.createElement('div');
+                card.className = 'animated-card p-4 rounded-xl text-center flex flex-col items-center shadow-lg transform transition-all duration-500';
+                card.style.transitionDelay = `${index * 50}ms`; // Staggered animation
+                card.dataset.itemId = character.id; // Store ID for event delegation
+                card.dataset.itemType = 'character'; // Store type for event delegation
+                
+                const icon = characterIcons[character.englishName] || '🧑‍🤝‍🧑';
+                const iconHTML = `
+                    <div class="character-icon-container">
+                        <span style="font-size: 2rem;">${icon}</span>
+                    </div>
+                `;
+
+                card.innerHTML = `
+                    ${iconHTML}
+                    <h3 class="text-lg font-bold text-white mb-2 line-clamp-1">${character.name}</h3>
+                    <div class="flex flex-col gap-2 mt-4 w-full">
+                        <button class="character-analysis-button bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full text-sm transition transform hover:scale-105">
+                            تحليل الشخصية
+                        </button>
+                        <button class="character-past-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition transform hover:scale-105">
+                            ملخص الماضي
+                        </button>
+
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            setTimeout(() => {
+                document.querySelectorAll('.animated-card').forEach(card => card.classList.add('show'));
+            }, 50);
+        }
+
+        window.renderArcs = function(arcsToRender) {
+            const container = document.getElementById('arcs-container');
+            container.innerHTML = '';
+            arcsToRender.forEach((arc, index) => {
+                const card = document.createElement('div');
+                card.className = 'animated-card p-6 rounded-xl text-center flex flex-col items-center shadow-lg transform transition-all duration-500';
+                card.style.transitionDelay = `${index * 50}ms`;
+                card.dataset.itemId = arc.id;
+                card.dataset.itemType = 'arc';
+                
+                card.innerHTML = `
+                    <span class="text-5xl mb-4 text-red-500">${arc.icon}</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">${arc.name}</h3>
+                    <button class="arc-summary-button mt-4 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-full text-sm transition transform hover:scale-105">
+                        عرض الملخص
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+            setTimeout(() => {
+                document.querySelectorAll('.animated-card').forEach(card => card.classList.add('show'));
+            }, 50);
+        }
+
+        window.renderTheories = function(theoriesToRender) {
+            const container = document.getElementById('theories-container');
+            container.innerHTML = '';
+            theoriesToRender.forEach((theory, index) => {
+                const card = document.createElement('div');
+                card.className = 'animated-card p-6 rounded-xl text-center flex flex-col items-center shadow-lg transform transition-all duration-500';
+                card.style.transitionDelay = `${index * 50}ms`;
+                card.dataset.itemId = theory.id;
+                card.dataset.itemType = 'theory';
+
+                card.innerHTML = `
+                    <span class="text-5xl mb-4 text-yellow-500">${theory.icon}</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">${theory.title}</h3>
+                    <button class="theory-summary-button mt-4 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-full text-sm transition transform hover:scale-105">
+                        عرض الملخص
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+            setTimeout(() => {
+                document.querySelectorAll('.animated-card').forEach(card => card.classList.add('show'));
+            }, 50);
+        }
+
+        window.renderFruits = function(fruitsToRender) {
+            const container = document.getElementById('fruits-container');
+            container.innerHTML = '';
+            fruitsToRender.forEach((fruit, index) => {
+                const card = document.createElement('div');
+                card.className = 'animated-card p-6 rounded-xl text-center flex flex-col items-center shadow-lg transform transition-all duration-500';
+                card.style.transitionDelay = `${index * 50}ms`;
+                card.dataset.itemId = fruit.id;
+                card.dataset.itemType = 'fruit';
+                
+                const icon = fruitIcons[fruit.name] || '❓';
+                const iconHTML = `<div class="icon-circle"><span style="font-size: 2rem;">${icon}</span></div>`;
+                
+                card.innerHTML = `
+                    ${iconHTML}
+                    <h3 class="text-xl font-bold text-white mb-2 line-clamp-1">${fruit.name}</h3>
+                    <button class="fruit-summary-button mt-4 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-full text-sm transition transform hover:scale-105">
+                        عرض الملخص
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+            setTimeout(() => {
+                document.querySelectorAll('.animated-card').forEach(card => card.classList.add('show'));
+            }, 50);
+        }
+
+        window.filterCharacters = function() {
+            const filterBy = document.getElementById('character-filter').value;
+            let sortedCharacters = [...characterData];
+            switch (filterBy) {
+                case 'strength-desc':
+                    sortedCharacters.sort((a, b) => b.strength - a.strength);
+                    break;
+                case 'strength-asc':
+                    sortedCharacters.sort((a, b) => a.strength - b.strength);
+                    break;
+                case 'appearance-desc':
+                    sortedCharacters.sort((a, b) => b.appearanceFrequency - a.appearanceFrequency);
+                    break;
+                case 'appearance-asc':
+                    sortedCharacters.sort((a, b) => a.appearanceFrequency - b.appearanceFrequency);
+                    break;
+                case 'none':
+                default:
+                    sortedCharacters.sort((a, b) => a.id - b.id);
+                    break;
+            }
+            window.renderCharacters(sortedCharacters);
+            window.playFilterSound();
+        }
+
+        window.filterFruits = function() {
+            const filterType = document.getElementById('fruit-filter').value;
+            let filteredFruits = [...fruitsData];
+            if (filterType !== 'all') {
+                filteredFruits = fruitsData.filter(fruit => fruit.type === filterType);
+            }
+            window.renderFruits(filteredFruits);
+            window.playFilterSound();
+        }
+
+        window.startProChallenge = function() {
+            shuffledQuestions = window.shuffleArray([...proQuestions]).slice(0, 5);
+            currentQuestionIndex = 0;
+            correctAnswersCount = 0;
+            questionAnswered = false;
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('question-box').classList.add('glowing');
+            window.displayQuestion();
+        }
+
+        window.displayQuestion = function() {
+            if (currentQuestionIndex >= shuffledQuestions.length) {
+                window.finishProChallenge(true);
+                return;
+            }
+            const questionTextElement = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const currentQuestion = shuffledQuestions[currentQuestionIndex];
+            questionTextElement.textContent = `السؤال ${currentQuestionIndex + 1} من ${shuffledQuestions.length}: ${currentQuestion.question}`;
+            optionsContainer.innerHTML = '';
+            questionAnswered = false;
+            
+            const shuffledOptions = window.shuffleArray([...currentQuestion.options]);
+
+            shuffledOptions.forEach((option, index) => {
+                const optionButton = document.createElement('button');
+                optionButton.className = 'pro-challenge-option-new p-4 rounded-lg text-right text-white font-medium shadow-md transition';
+                optionButton.textContent = option;
+                optionButton.addEventListener('click', () => {
+                    window.selectOption(option, shuffledOptions);
+                    window.playClickSound();
+                });
+                optionsContainer.appendChild(optionButton);
+            });
+        }
+
+        window.selectOption = function(selectedOptionText, shuffledOptions) {
+            if (questionAnswered) return;
+            questionAnswered = true;
+            const currentQuestion = shuffledQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('#options-container .pro-challenge-option-new');
+            const correctOptionText = currentQuestion.options[currentQuestion.correctAnswerIndex];
+
+            options.forEach(option => {
+                option.removeEventListener('click', () => {}); // Remove old listeners
+                option.style.pointerEvents = 'none'; // Disable all buttons
+                if (option.textContent === selectedOptionText) {
+                    option.classList.add('selected');
+                }
+            });
+
+            const correctOptionElement = Array.from(options).find(opt => opt.textContent === correctOptionText);
+            
+            if (selectedOptionText === correctOptionText) {
+                correctAnswersCount++;
+                if (correctOptionElement) {
+                    correctOptionElement.classList.add('correct');
+                }
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    window.displayQuestion();
+                }, 1500);
+            } else {
+                const selectedOptionElement = Array.from(options).find(opt => opt.textContent === selectedOptionText);
+                if (selectedOptionElement) {
+                    selectedOptionElement.classList.add('incorrect');
+                }
+                if (correctOptionElement) {
+                    correctOptionElement.classList.add('correct');
+                }
+                
+                setTimeout(() => {
+                    window.finishProChallenge(false);
+                }, 1500);
+            }
+        }
+
+        window.finishProChallenge = function(success) {
+            // Hide all quiz elements immediately
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.querySelectorAll('.quiz-header').forEach(el => el.classList.add('hidden')); // Hide headers/paragraphs
+
+            if (success) {
+                localStorage.setItem('isProActivated', 'true');
+                window.playOnePieceSuccessAnimation();
+                window.updateProButtonState();
+            } else {
+                window.playProFailureAnimationNew();
+                setTimeout(() => {
+                    // Show quiz headers/paragraphs again before restarting
+                    document.querySelectorAll('.quiz-header').forEach(el => el.classList.remove('hidden'));
+                    window.startProChallenge();
+                }, 4000); // Wait for the animation to finish
+            }
+        }
+
+        window.playOnePieceSuccessAnimation = function() {
+            window.playSuccessSound();
+            const anim = document.getElementById('one-piece-success-animation');
+            const successText = anim.querySelector('.success-text-main');
+            const crownIcon = anim.querySelector('.success-crown-icon');
+
+            anim.classList.add('show');
+            
+            // Ensure text is visible and starts its animation
+            successText.style.opacity = 1; // Make sure it's visible initially
+            successText.style.animation = 'text-scale 1s ease-out forwards, text-glow 2s infinite alternate'; // Play its initial appearance animation
+            successText.style.display = 'block'; // Ensure it's displayed
+
+            // After text animation finishes, fade it out and show crown
+            setTimeout(() => {
+                successText.style.animation = 'text-fade-out 0.5s forwards'; // New animation for fading out text
+                setTimeout(() => {
+                    successText.style.display = 'none'; // Hide text after fading
+                    crownIcon.style.opacity = 1; // Make crown visible
+                    crownIcon.classList.add('glowing'); // Start crown glow animation
+                }, 500); // After text-fade-out duration
+            }, 1500); // Delay for text to be fully displayed before fading out (text-scale is 1s, give it a bit more)
+
+            const content = anim.querySelector('.success-animation-content');
+            content.querySelectorAll('.success-particle').forEach(p => p.remove());
+
+            for (let i = 0; i < 100; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'success-particle';
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                const x = (Math.random() - 0.5) * window.innerWidth * 0.8;
+                const y = (Math.random() - 0.5) * window.innerHeight * 0.8;
+                particle.style.setProperty('--x', `${x}px`);
+                particle.style.setProperty('--y', `${y}px`);
+                particle.style.animationDelay = `${Math.random() * 0.5}s`;
+                content.appendChild(particle);
+            }
+
+            setTimeout(() => {
+                anim.classList.remove('show');
+                anim.querySelectorAll('.success-particle').forEach(p => p.remove());
+                crownIcon.classList.remove('glowing');
+                crownIcon.style.opacity = 0; // Hide crown after animation
+                successText.style.display = 'block'; // Reset text display for next time
+                window.showPage('pro-features-page');
+            }, 5000);
+        }
+
+        window.playProFailureAnimationNew = function() {
+            window.playFailureSound();
+            const anim = document.getElementById('pro-failure-animation-new');
+            anim.classList.add('show');
+
+            const content = anim.querySelector('.failure-animation-content');
+            // Clear previous shatter effects
+            content.querySelectorAll('.failure-shatter-effect').forEach(p => p.remove());
+
+            const shatterEffect = document.createElement('div');
+            shatterEffect.className = 'failure-shatter-effect';
+            content.appendChild(shatterEffect);
+
+            setTimeout(() => {
+                anim.classList.remove('show');
+                shatterEffect.remove(); // Clean up shatter effect
+            }, 5000);
+        }
+
+        window.showProRequiredAnimation = function() {
+            const animation = document.getElementById('pro-required-animation');
+            const arrow = animation.querySelector('.pro-required-arrow');
+            animation.classList.add('show');
+            
+            arrow.style.animation = 'none';
+            void arrow.offsetWidth; // Trigger reflow
+            arrow.style.animation = 'arrow-travel 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards';
+
+            setTimeout(() => {
+                animation.classList.remove('show');
+            }, 2500); // Duration of the animation
+        }
+
+        window.updateProButtonState = function() {
+            const proButton = document.getElementById('pro-button-main');
+            const proText = proButton.querySelector('.pro-text');
+            const proIcon = proButton.querySelector('.pro-icon-new');
+            const mobileProButton = document.getElementById('mobile-menu-pro-button');
+            const mobileProText = mobileProButton.querySelector('.pro-text');
+            const mobileProIcon = mobileProButton.querySelector('.pro-icon-new');
+
+            const proLocalStorage = localStorage.getItem('isProActivated');
+
+            if (proLocalStorage === 'true') {
+                isProActivated = true;
+                proButton.classList.add('pro-activated-new');
+                proText.textContent = "ونبيسي برو (مفعل)";
+                mobileProButton.classList.add('pro-activated-new');
+                mobileProText.textContent = "ونبيسي برو (مفعل)";
+                
+                proButton.removeEventListener('click', window.handleProButtonChallengeClick);
+                proButton.addEventListener('click', window.handleProButtonFeaturesClick);
+                mobileProButton.removeEventListener('click', window.handleProButtonChallengeClick);
+                mobileProButton.addEventListener('click', window.handleProButtonFeaturesClick);
+
+            } else {
+                isProActivated = false;
+                proButton.classList.remove('pro-activated-new');
+                proText.textContent = "ونبيسي برو";
+                mobileProButton.classList.remove('pro-activated-new');
+                mobileProText.textContent = "ونبيسي برو";
+
+                proButton.removeEventListener('click', window.handleProButtonFeaturesClick);
+                proButton.addEventListener('click', window.handleProButtonChallengeClick);
+                mobileProButton.removeEventListener('click', window.handleProButtonFeaturesClick);
+                mobileProButton.addEventListener('click', window.handleProButtonChallengeClick);
+            }
+        }
+
+        // Event handlers for Pro button to avoid redundant listeners
+        window.handleProButtonFeaturesClick = function() {
+            window.showPage('pro-features-page');
+            window.playClickSound();
+            window.closeMobileMenu(); // Close menu if opened from mobile button
+        }
+
+        window.handleProButtonChallengeClick = function() {
+            window.showPage('pro-challenge-page');
+            window.playClickSound();
+            window.closeMobileMenu(); // Close menu if opened from mobile button
+        }
+
+        // Settings Modal Functions
+        window.openSettingsModal = function() {
+            document.getElementById('settings-modal').classList.add('show');
+            window.playSettingsSound();
+        }
+
+        window.closeSettingsModal = function() {
+            document.getElementById('settings-modal').classList.remove('show');
+            window.playClickSound(); // Play a general click sound on close
+        }
+
+        window.toggleTheme = function() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+            window.playClickSound();
+        }
+
+        window.setVolume = function(value) {
+            Tone.Master.volume.value = Tone.MidiToFrequency.toFrequency(value * 100 - 100); // Map 0-1 to -100 to 0 dB
+            localStorage.setItem('volume', value);
+        }
+
+        window.toggleAnimationQuality = function() {
+            animationsEnabled = !animationsEnabled;
+            localStorage.setItem('animationsEnabled', animationsEnabled);
+            const qualityToggleBtn = document.getElementById('quality-toggle');
+            qualityToggleBtn.textContent = animationsEnabled ? 'عالية / منخفضة' : 'منخفضة / عالية';
+            window.playClickSound(); // Play sound regardless of quality setting for feedback
+        }
+
+        // Function to copy text to clipboard
+        window.copyToClipboard = function(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            // Optional: Provide visual feedback to the user that text has been copied
+            const originalButtonText = document.getElementById('copy-details-button').textContent;
+            document.getElementById('copy-details-button').textContent = 'تم النسخ!';
+            setTimeout(() => {
+                document.getElementById('copy-details-button').textContent = originalButtonText;
+            }, 1500);
+        }
+
+        window.showCardDetailsModal = function(item, type) {
+            const modal = document.getElementById('card-details-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content-details');
+            const modalContentWrapper = modal.querySelector('.card-details-modal-content');
+            const copyButton = document.getElementById('copy-details-button');
+
+            let contentHTML = '';
+            let titleText = '';
+            let copyText = ''; // Text to be copied
+
+            if (type === 'character') {
+                titleText = item.name;
+                const icon = characterIcons[item.englishName] || '🧑‍🤝‍🧑';
+                contentHTML = `
+                    <div class="flex flex-col items-center">
+                        <div class="character-icon-container mb-6 border-4 border-red-500 shadow-xl">
+                            <span style="font-size: 2rem;">${icon}</span>
+                        </div>
+                        <div class="text-right w-full">
+                            <p class="text-xl text-gray-300 mt-4 leading-relaxed">القوة: ${item.strength}</p>
+                            <p class="text-xl text-gray-300 mb-6 leading-relaxed">الظهور: ${item.appearanceFrequency}</p>
+                            ${isProActivated ? `
+                                <h4 class="text-2xl font-bold text-yellow-400 mb-2">تحليل الشخصية</h4>
+                                <p class="text-lg text-gray-300 leading-relaxed">${item.analysis}</p>
+                                <h4 class="text-2xl font-bold text-blue-400 mt-6 mb-2">ملخص الماضي</h4>
+                                <p class="text-lg text-gray-300 leading-relaxed">${item.past}</p>
+                            ` : `
+                                <div class="text-center mt-8">
+                                    <h4 class="text-3xl font-extrabold text-red-400 mb-4">محتوى حصري لـ ونبيسي برو</h4>
+                                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">قم بتفعيل وضع برو للوصول إلى التحليل والماضي الكامل للشخصية.</p>
+                                    <button id="modal-subscribe-button" class="button-glow px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-full transition transform hover:scale-105">
+                                        اشترك الآن
+                                    </button>
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                `;
+                copyText = `الشخصية: ${item.name}\nالقوة: ${item.strength}\nالظهور: ${item.appearanceFrequency}\n${isProActivated ? `تحليل: ${item.analysis}\nالماضي: ${item.past}` : 'محتوى برو حصري.'}`;
+
+            } else if (type === 'arc') {
+                titleText = item.name;
+                contentHTML = `
+                    <span class="text-6xl mb-6 text-red-500">${item.icon}</span>
+                    ${isProActivated ? `
+                        <p class="text-lg text-gray-300 leading-relaxed">${item.summary}</p>
+                    ` : `
+                        <div class="text-center mt-8">
+                            <h4 class="text-3xl font-extrabold text-red-400 mb-4">محتوى حصري لـ ونبيسي برو</h4>
+                            <p class="text-lg text-gray-300 mb-6 leading-relaxed">قم بتفعيل وضع برو للاطلاع على ملخص الآرك كاملاً.</p>
+                            <button id="modal-subscribe-button" class="button-glow px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-full transition transform hover:scale-105">
+                                اشترك الآن
+                            </button>
+                        </div>
+                    `}
+                `;
+                copyText = `الآرك: ${item.name}\n${isProActivated ? `الملخص: ${item.summary}` : 'محتوى برو حصري.'}`;
+
+            } else if (type === 'theory') {
+                titleText = item.title;
+                contentHTML = `
+                    <span class="text-6xl mb-6 text-yellow-500">${item.icon}</span>
+                    ${isProActivated ? `
+                        <p class="text-lg text-gray-300 leading-relaxed">${item.summary}</p>
+                    ` : `
+                        <div class="text-center mt-8">
+                            <h4 class="text-3xl font-extrabold text-red-400 mb-4">محتوى حصري لـ ونبيسي برو</h4>
+                            <p class="text-lg text-gray-300 mb-6 leading-relaxed">قم بتفعيل وضع برو للاطلاع على تفاصيل النظرية.</p>
+                            <button id="modal-subscribe-button" class="button-glow px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-full transition transform hover:scale-105">
+                                        اشترك الآن
+                                    </button>
+                                </div>
+                            `}
+                        </div>
+                    `;
+                copyText = `النظرية: ${item.title}\n${isProActivated ? `الملخص: ${item.summary}` : 'محتوى برو حصري.'}`;
+
+                } else if (type === 'fruit') {
+                    titleText = item.name;
+                    const icon = fruitIcons[item.name] || '❓';
+                    contentHTML = `
+                        <div class="flex flex-col items-center">
+                            <div class="icon-circle mb-6 border-4 border-yellow-500 shadow-xl">
+                                <span style="font-size: 2rem;">${icon}</span>
+                            </div>
+                            <p class="text-xl text-gray-400 mb-1">المستخدم: ${item.user}</p>
+                            <p class="text-lg text-yellow-500 mb-6">${item.type}</p>
+                            ${isProActivated ? `
+                                <p class="text-lg text-gray-300 leading-relaxed">${item.summary}</p>
+                            ` : `
+                                <div class="text-center mt-8">
+                                    <h4 class="text-3xl font-extrabold text-red-400 mb-4">محتوى حصري لـ ونبيسي برو</h4>
+                                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">قم بتفعيل وضع برو للاطلاع على ملخص الفاكهة.</p>
+                                    <button id="modal-subscribe-button" class="button-glow px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-full transition transform hover:scale-105">
+                                        اشترك الآن
+                                    </button>
+                                </div>
+                            `}
+                        </div>
+                    `;
+                    copyText = `الفاكهة: ${item.name}\nالمستخدم: ${item.user}\nالنوع: ${item.type}\n${isProActivated ? `الملخص: ${item.summary}` : 'محتوى برو حصري.'}`;
+                }
+
+                modalTitle.textContent = titleText;
+                modalContent.innerHTML = contentHTML;
+                modal.classList.add('show');
+                modalContentWrapper.classList.add('rotate-in');
+                window.playCardOpenSound(); // Play sound when modal opens
+
+                // Set copy button functionality
+                copyButton.onclick = () => window.copyToClipboard(copyText);
+
+                // Add event listener for the subscribe button inside the modal if it exists
+                const modalSubscribeButton = document.getElementById('modal-subscribe-button');
+                if (modalSubscribeButton) {
+                    modalSubscribeButton.addEventListener('click', () => {
+                        window.closeCardDetailsModal();
+                        window.showPage('pro-challenge-page');
+                        window.playClickSound();
+                    });
+                }
+            }
+
+            window.closeCardDetailsModal = function() {
+                const modal = document.getElementById('card-details-modal');
+                const modalContentWrapper = modal.querySelector('.card-details-modal-content');
+                modal.classList.remove('show');
+                modalContentWrapper.classList.remove('rotate-in');
+                window.playCardCloseSound(); // Play sound when modal closes
+            }
+
+            window.showProRequiredModal = function() {
+                const modal = document.getElementById('pro-required-modal');
+                modal.classList.add('show');
+                window.playSettingsSound(); // Use settings sound for this modal too
+            }
+
+            window.closeModal = function(modalId) {
+                const modal = document.getElementById(modalId);
+                modal.classList.remove('show');
+                window.playClickSound(); // Play a general click sound on close
+            }
+
+            // Mobile menu functions
+            window.openMobileMenu = function() {
+                document.getElementById('mobile-menu-overlay').classList.add('show');
+                document.getElementById('mobile-menu-overlay').classList.remove('hidden'); // Ensure it's not hidden by display:none
+                window.playClickSound();
+            }
+
+            window.closeMobileMenu = function() {
+                document.getElementById('mobile-menu-overlay').classList.remove('show');
+                // Use a timeout to re-add 'hidden' after the transition
+                setTimeout(() => {
+                    document.getElementById('mobile-menu-overlay').classList.add('hidden');
+                }, 300); // Match transition duration
+                window.playClickSound();
+            }
+
+            window.showPage = function(pageId) {
+                const sections = ['homepage', 'characters-page', 'arcs-page', 'theories-page', 'fruits-page', 'pro-challenge-page', 'pro-features-page'];
+                const pageTransitionOverlay = document.getElementById('page-transition-overlay');
+                const transitionCanvas = document.getElementById('transition-canvas');
+                const ctx = transitionCanvas.getContext('2d');
+                transitionCanvas.width = window.innerWidth;
+                transitionCanvas.height = window.innerHeight;
+
+                pageTransitionOverlay.classList.add('active');
+
+                let animationFrameId;
+                let startTime = null;
+                const duration = 800;
+
+                // Show loading skeletons for relevant content pages
+                if (pageId === 'characters-page') {
+                    renderLoadingSkeletons('characters-container', 12); // Show 12 skeleton cards
+                } else if (pageId === 'arcs-page') {
+                    renderLoadingSkeletons('arcs-container', 6); // Show 6 skeleton cards
+                } else if (pageId === 'theories-page') {
+                    renderLoadingSkeletons('theories-container', 4); // Show 4 skeleton cards
+                } else if (pageId === 'fruits-page') {
+                    renderLoadingSkeletons('fruits-container', 9); // Show 9 skeleton cards
+                }
+
+
+                function animateTransition(currentTime) {
+                    if (!startTime) startTime = currentTime;
+                    const elapsedTime = currentTime - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    ctx.clearRect(0, 0, transitionCanvas.width, transitionCanvas.height);
+
+                    const maxRadius = Math.max(transitionCanvas.width, transitionCanvas.height) / 1.5;
+                    const currentRadius = maxRadius * progress;
+
+                    ctx.beginPath();
+                    ctx.arc(transitionCanvas.width / 2, transitionCanvas.height / 2, currentRadius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 0, 0, ${progress})`;
+                    ctx.fill();
+
+                    if (progress < 1) {
+                        animationFrameId = requestAnimationFrame(animateTransition);
+                    } else {
+                        sections.forEach(id => {
+                            const element = document.getElementById(id);
+                            if (element) element.classList.add('hidden');
+                        });
+                        document.getElementById(pageId).classList.remove('hidden');
+
+                        // Simulate content loading delay before rendering actual content
+                        setTimeout(() => {
+                            if (pageId === 'characters-page') {
+                                window.renderCharacters(characterData);
+                            } else if (pageId === 'arcs-page') {
+                                window.renderArcs(arcsData);
+                            } else if (pageId === 'theories-page') {
+                                window.renderTheories(theoriesData);
+                            } else if (pageId === 'fruits-page') {
+                                window.renderFruits(fruitsData);
+                            } else if (pageId === 'pro-challenge-page') {
+                                // Hide quiz headers/paragraphs when starting the challenge
+                                document.querySelectorAll('.quiz-header').forEach(el => el.classList.remove('hidden'));
+                                window.startProChallenge();
+                            } else if (pageId === 'pro-features-page') {
+                                // For pro features, no specific rendering needed, just show the section
+                            }
+                        }, 500); // Small delay to show skeleton
+
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                        setTimeout(() => {
+                            pageTransitionOverlay.classList.remove('active');
+                        }, 500);
+                    }
+                }
+                requestAnimationFrame(animateTransition);
+            }
+
+            // Event Listeners Setup
+            document.addEventListener('DOMContentLoaded', () => {
+                initializeAudioContext(); // Initialize audio context on first user interaction
+
+                // Load settings from localStorage
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                }
+                const savedVolume = localStorage.getItem('volume');
+                if (savedVolume !== null) {
+                    document.getElementById('volume-slider').value = savedVolume;
+                    window.setVolume(savedVolume);
+                }
+                const savedAnimations = localStorage.getItem('animationsEnabled');
+                if (savedAnimations !== null) {
+                    animationsEnabled = JSON.parse(savedAnimations);
+                    document.getElementById('quality-toggle').textContent = animationsEnabled ? 'عالية / منخفضة' : 'منخفضة / عالية';
+                }
+
+
+                characterData = staticOnePieceCharacters.map((char, index) => ({ ...char, id: index + 1 }));
+                window.updateProButtonState();
+                window.showPage('homepage');
+
+                // Navigation Tabs (Desktop)
+                document.getElementById('homepage-tab').addEventListener('click', () => { window.showPage('homepage'); window.playClickSound(); });
+                document.getElementById('characters-tab').addEventListener('click', () => { window.showPage('characters-page'); window.playClickSound(); });
+                document.getElementById('arcs-tab').addEventListener('click', () => { window.showPage('arcs-page'); window.playClickSound(); });
+                document.getElementById('theories-tab').addEventListener('click', () => { window.showPage('theories-page'); window.playClickSound(); });
+                document.getElementById('fruits-tab').addEventListener('click', () => { window.showPage('fruits-page'); window.playClickSound(); });
+                document.getElementById('pro-features-tab').addEventListener('click', () => { window.showPage('pro-features-page'); window.playClickSound(); });
+
+                // Homepage Buttons
+                document.getElementById('homepage-characters-button').addEventListener('click', () => { window.showPage('characters-page'); window.playClickSound(); });
+                document.getElementById('homepage-arcs-button').addEventListener('click', () => { window.showPage('arcs-page'); window.playClickSound(); });
+
+                // Character Filter
+                document.getElementById('character-filter').addEventListener('change', () => { window.filterCharacters(); window.playFilterSound(); });
+
+                // Fruit Filter
+                document.getElementById('fruit-filter').addEventListener('change', () => { window.filterFruits(); window.playFilterSound(); });
+
+                // Quiz Buttons
+                document.getElementById('retry-button').addEventListener('click', () => { window.startProChallenge(); window.playClickSound(); });
+                document.getElementById('quiz-homepage-button').addEventListener('click', () => { window.showPage('homepage'); window.playClickSound(); });
+
+                // Modal Close Buttons
+                document.getElementById('card-details-close-button').addEventListener('click', () => { window.closeCardDetailsModal(); });
+                document.getElementById('pro-required-close-button').addEventListener('click', () => { window.closeModal('pro-required-modal'); });
+                
+                // Settings Button & Modal Controls
+                document.getElementById('settings-button').addEventListener('click', window.openSettingsModal);
+                document.getElementById('settings-close-button').addEventListener('click', window.closeSettingsModal);
+                document.getElementById('theme-toggle').addEventListener('click', window.toggleTheme);
+                document.getElementById('volume-slider').addEventListener('input', (e) => window.setVolume(e.target.value));
+                document.getElementById('quality-toggle').addEventListener('click', window.toggleAnimationQuality);
+
+                // Hamburger Menu Event Listeners
+                document.getElementById('hamburger-button').addEventListener('click', window.openMobileMenu);
+                document.getElementById('mobile-menu-close-button').addEventListener('click', window.closeMobileMenu);
+                
+                // Mobile Menu Navigation Links
+                document.getElementById('mobile-homepage-tab').addEventListener('click', () => { window.showPage('homepage'); window.playClickSound(); window.closeMobileMenu(); });
+                document.getElementById('mobile-characters-tab').addEventListener('click', () => { window.showPage('characters-page'); window.playClickSound(); window.closeMobileMenu(); });
+                document.getElementById('mobile-arcs-tab').addEventListener('click', () => { window.showPage('arcs-page'); window.playClickSound(); window.closeMobileMenu(); });
+                document.getElementById('mobile-theories-tab').addEventListener('click', () => { window.showPage('theories-page'); window.playClickSound(); window.closeMobileMenu(); });
+                document.getElementById('mobile-fruits-tab').addEventListener('click', () => { window.showPage('fruits-page'); window.playClickSound(); window.closeMobileMenu(); });
+                document.getElementById('mobile-pro-features-tab').addEventListener('click', () => { window.showPage('pro-features-page'); window.playClickSound(); window.closeMobileMenu(); });
+
+                // Scroll-to-Top button logic
+                const scrollToTopButton = document.getElementById('scroll-to-top-button');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) { // Show button after scrolling 300px
+                        scrollToTopButton.classList.add('show');
+                    } else {
+                        scrollToTopButton.classList.remove('show');
+                    }
+                });
+                scrollToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    window.playClickSound();
+                });
+
+
+                // Event delegation for dynamically created card buttons
+                document.getElementById('characters-container').addEventListener('click', (event) => {
+                    const target = event.target;
+                    const card = target.closest('.animated-card');
+                    if (card) {
+                        const characterId = parseInt(card.dataset.itemId);
+                        if (target.classList.contains('character-analysis-button') || target.classList.contains('character-past-button')) {
+                            if (isProActivated) {
+                                window.showCardDetailsModal(characterData.find(c => c.id === characterId), 'character');
+                            } else {
+                                window.showProRequiredAnimation();
+                                window.playClickSound();
+                            }
+                            event.stopPropagation(); // Prevent card click from triggering as well
+                        } else {
+                            // If clicking the card itself (not the specific buttons)
+                            window.showCardDetailsModal(characterData.find(c => c.id === characterId), 'character');
+                        }
+                    }
+                });
+
+                document.getElementById('arcs-container').addEventListener('click', (event) => {
+                    const target = event.target;
+                    const card = target.closest('.animated-card');
+                    if (card) {
+                        const arcId = parseInt(card.dataset.itemId);
+                        if (target.classList.contains('arc-summary-button')) {
+                            if (isProActivated) {
+                                window.showCardDetailsModal(arcsData.find(a => a.id === arcId), 'arc');
+                            } else {
+                                window.showProRequiredAnimation();
+                                window.playClickSound();
+                            }
+                            event.stopPropagation();
+                        } else {
+                            window.showCardDetailsModal(arcsData.find(a => a.id === arcId), 'arc');
+                        }
+                    }
+                });
+
+                document.getElementById('theories-container').addEventListener('click', (event) => {
+                    const target = event.target;
+                    const card = target.closest('.animated-card');
+                    if (card) {
+                        const theoryId = parseInt(card.dataset.itemId);
+                        if (target.classList.contains('theory-summary-button')) {
+                            if (isProActivated) {
+                                window.showCardDetailsModal(theoriesData.find(t => t.id === theoryId), 'theory');
+                            } else {
+                                window.showProRequiredAnimation();
+                                window.playClickSound();
+                            }
+                            event.stopPropagation();
+                        } else {
+                            window.showCardDetailsModal(theoriesData.find(t => t.id === theoryId), 'theory');
+                        }
+                    }
+                });
+
+                document.getElementById('fruits-container').addEventListener('click', (event) => {
+                    const target = event.target;
+                    const card = target.closest('.animated-card');
+                    if (card) {
+                        const fruitId = parseInt(card.dataset.itemId);
+                        if (target.classList.contains('fruit-summary-button')) {
+                            if (isProActivated) {
+                                window.showCardDetailsModal(fruitsData.find(f => f.id === fruitId), 'fruit');
+                            } else {
+                                window.showProRequiredAnimation();
+                                window.playClickSound();
+                            }
+                            event.stopPropagation();
+                        } else {
+                            window.showCardDetailsModal(fruitsData.find(f => f.id === fruitId), 'fruit');
+                        }
+                    }
+                });
+
+                // Pro Features Section Card Clicks (if not handled by specific buttons)
+                document.getElementById('pro-features-page').addEventListener('click', (event) => {
+                    const card = event.target.closest('.animated-card');
+                    if (card && card.id.startsWith('pro-feature-')) {
+                        window.playClickSound();
+                    }
+                });
+
+                // Character Chat Button Click
+
+
+                // Search Functionality
+                const searchInput = document.getElementById('search-input');
+                const searchButton = document.getElementById('search-button');
+                const searchResults = document.getElementById('search-results');
+                const noSearchResults = document.getElementById('no-search-results');
+
+                searchButton.addEventListener('click', () => {
+                    window.performSearch(searchInput.value);
+                });
+
+                searchInput.addEventListener('keypress', (event) => {
+                    if (event.key === 'Enter') {
+                        window.performSearch(searchInput.value);
+                    }
+                });
+            });
+
+            // Search Function
+            window.performSearch = function(query) {
+                if (!query.trim()) return;
+                
+                window.playFilterSound();
+                window.showPage('search-page');
+                
+                query = query.trim().toLowerCase();
+                searchResults.innerHTML = '';
+                
+                // Search in all data sources
+                const matchingCharacters = characterData.filter(char => 
+                    char.name.toLowerCase().includes(query) || 
+                    char.englishName.toLowerCase().includes(query) ||
+                    (char.description && char.description.toLowerCase().includes(query)));
+                
+                const matchingArcs = arcsData.filter(arc => 
+                    arc.name.toLowerCase().includes(query) || 
+                    (arc.description && arc.description.toLowerCase().includes(query)));
+                
+                const matchingTheories = theoriesData.filter(theory => 
+                    theory.title.toLowerCase().includes(query) || 
+                    (theory.content && theory.content.toLowerCase().includes(query)));
+                
+                const matchingFruits = fruitsData.filter(fruit => 
+                    fruit.name.toLowerCase().includes(query) || 
+                    fruit.type.toLowerCase().includes(query) || 
+                    (fruit.description && fruit.description.toLowerCase().includes(query)));
+                
+                const totalResults = matchingCharacters.length + matchingArcs.length + matchingTheories.length + matchingFruits.length;
+                
+                if (totalResults === 0) {
+                    searchResults.classList.add('hidden');
+                    noSearchResults.classList.remove('hidden');
+                    return;
+                }
+                
+                searchResults.classList.remove('hidden');
+                noSearchResults.classList.add('hidden');
+                
+                // Display results
+                matchingCharacters.forEach(char => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition cursor-pointer';
+                    resultItem.innerHTML = `
+                        <div class="flex items-center mb-2">
+                            <div class="character-icon-container mr-3" style="width: 40px; height: 40px;">
+                                <span style="font-size: 1.5rem;">${characterIcons[char.englishName] || '🧑‍🤝‍🧑'}</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">${char.name}</h3>
+                        </div>
+                        <p class="text-sm text-gray-300">شخصية</p>
+                    `;
+                    resultItem.addEventListener('click', () => {
+                        window.showCardDetailsModal(char, 'character');
+                    });
+                    searchResults.appendChild(resultItem);
+                });
+                
+                matchingArcs.forEach(arc => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition cursor-pointer';
+                    resultItem.innerHTML = `
+                        <div class="flex items-center mb-2">
+                            <span class="text-3xl mr-3 text-red-500">${arc.icon}</span>
+                            <h3 class="text-lg font-bold text-white">${arc.name}</h3>
+                        </div>
+                        <p class="text-sm text-gray-300">آرك</p>
+                    `;
+                    resultItem.addEventListener('click', () => {
+                        window.showCardDetailsModal(arc, 'arc');
+                    });
+                    searchResults.appendChild(resultItem);
+                });
+                
+                matchingTheories.forEach(theory => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition cursor-pointer';
+                    resultItem.innerHTML = `
+                        <div class="flex items-center mb-2">
+                            <span class="text-3xl mr-3 text-yellow-500">${theory.icon}</span>
+                            <h3 class="text-lg font-bold text-white">${theory.title}</h3>
+                        </div>
+                        <p class="text-sm text-gray-300">نظرية</p>
+                    `;
+                    resultItem.addEventListener('click', () => {
+                        window.showCardDetailsModal(theory, 'theory');
+                    });
+                    searchResults.appendChild(resultItem);
+                });
+                
+                matchingFruits.forEach(fruit => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition cursor-pointer';
+                    resultItem.innerHTML = `
+                        <div class="flex items-center mb-2">
+                            <span class="text-3xl mr-3">${fruit.icon}</span>
+                            <h3 class="text-lg font-bold text-white">${fruit.name}</h3>
+                        </div>
+                        <p class="text-sm text-gray-300">فاكهة شيطان - ${fruit.type}</p>
+                    `;
+                    resultItem.addEventListener('click', () => {
+                        window.showCardDetailsModal(fruit, 'fruit');
+                    });
+                    searchResults.appendChild(resultItem);
+                });
+            };
+
+
+
+        </script>
+    </body>
+    </html>
